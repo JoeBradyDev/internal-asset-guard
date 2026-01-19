@@ -1,0 +1,44 @@
+# Dependency folders
+node_modules
+**/node_modules
+npm-debug.log
+
+# Build artifacts
+dist
+.nx
+.next
+out
+
+# Git and IDE
+.git
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vim temporary/backup files
+*~
+*.swp
+*.swo
+.swp
+.swo
+.swn
+.swm
+*.un~
+.netrwhist
+
+# Docker files
+Dockerfile
+.dockerignore
+Tiltfile
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini

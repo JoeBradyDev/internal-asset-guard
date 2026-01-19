@@ -1,0 +1,77 @@
+# 1. Asset Service (Go)
+apiVersion: v1
+kind: Service
+metadata:
+  name: asset-service
+spec:
+  ports: [{ port: 8080 }]
+  selector: { app: asset-service }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asset-service
+spec:
+  selector: { matchLabels: { app: asset-service } }
+  template:
+    metadata: { labels: { app: asset-service } }
+    spec:
+      containers:
+        - name: asset-service
+          image: asset-guard-asset-service
+          imagePullPolicy: Never
+          env:
+            - name: DATABASE_URL
+              value: 'postgresql://postgres:password@postgres:5432/assetguard'
+---
+# 2. Gateway (NestJS)
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  ports: [{ port: 3000 }]
+  selector: { app: gateway }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+spec:
+  selector: { matchLabels: { app: gateway } }
+  template:
+    metadata: { labels: { app: gateway } }
+    spec:
+      containers:
+        - name: gateway
+          image: asset-guard-gateway
+          env:
+            - name: ASSET_SERVICE_URL
+              value: 'http://asset-service:8080'
+---
+# 3. Frontend (Next.js)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports: [{ port: 4200 }]
+  selector: { app: frontend }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector: { matchLabels: { app: frontend } }
+  template:
+    metadata: { labels: { app: frontend } }
+    spec:
+      containers:
+        - name: frontend
+          image: asset-guard-frontend
+          env:
+            - name: GATEWAY_URL
+              value: 'http://gateway:3000'
+            - name: HOSTNAME
+              value: '0.0.0.0'
