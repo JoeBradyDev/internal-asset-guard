@@ -44,3 +44,29 @@ Thumbs.db
 # Next.js
 .next
 out
+
+# Env files (Go apps often use these for local DB strings)
+.env
+.env.local
+
+# Go
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built by `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below if you choose to vendor)
+# vendor/
+
+# Go Workspace file
+go.work
+go.work.sum
+

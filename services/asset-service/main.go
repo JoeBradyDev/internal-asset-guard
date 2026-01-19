@@ -1,12 +1,20 @@
 package main
 
-import "fmt"
-
-func Hello(name string) string {
-	result := "Hello " + name
-	return result
-}
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func main() {
-	fmt.Println(Hello("services/asset-service"))
+	r := gin.Default()
+
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "up",
+			"service": "asset-service",
+		})
+	})
+
+	// Listen on port 8080
+	r.Run(":8080")
 }
