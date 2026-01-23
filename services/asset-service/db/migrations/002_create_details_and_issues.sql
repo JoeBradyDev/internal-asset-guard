@@ -1,4 +1,3 @@
--- UP
 CREATE TABLE device_detail (
     asset_id INTEGER PRIMARY KEY REFERENCES asset(id) ON DELETE CASCADE,
     hostname TEXT NOT NULL,
@@ -80,7 +79,8 @@ CREATE TABLE asset_note (
     created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
 
--- DOWN
+---- create above / drop below ----
+
 DROP TABLE IF EXISTS asset_issue;
 DROP TABLE IF EXISTS issue_source;
 DROP TABLE IF EXISTS issue_type;

@@ -1,4 +1,3 @@
--- UP
 CREATE TABLE cis_asset_class (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
@@ -37,7 +36,8 @@ CREATE TABLE asset_source_map (
     PRIMARY KEY (asset_id, asset_source_id)
 );
 
--- DOWN
+---- create above / drop below ----
+
 DROP TABLE IF EXISTS asset_source_map;
 DROP TABLE IF EXISTS asset;
 DROP TABLE IF EXISTS asset_source;

@@ -1,6 +1,3 @@
--- UP
-
---- 1. CONFIGURATION DRIFT (System State & Forensic Changes) ---
 INSERT INTO issue_type (category_id, name, description) VALUES
 (1, 'Firewall Rule Change', 'Unauthorized modification to local or network firewall rules.'),
 (1, 'Registry Key Modification', 'Critical security-related registry keys differ from baseline.'),
@@ -21,7 +18,6 @@ INSERT INTO issue_type (category_id, name, description) VALUES
 (1, 'DNS Resolver Overridden', 'Local DNS settings have been changed to point to unauthorized resolvers.'),
 (1, 'New Root CA Installed', 'A new root certificate was added to the system trusted store.');
 
---- 2. VULNERABILITY CLASSES (Generic buckets for CVE grouping) ---
 INSERT INTO issue_type (category_id, name, description) VALUES
 (2, 'Remote Code Execution (RCE)', 'Flaw allowing an attacker to execute arbitrary commands on the host.'),
 (2, 'SQL Injection (SQLi)', 'Input validation flaw allowing unauthorized database queries.'),
@@ -40,7 +36,6 @@ INSERT INTO issue_type (category_id, name, description) VALUES
 (2, 'XML External Entity (XXE)', 'Processing of XML input containing a reference to an external entity.'),
 (2, 'Unpatched Zero-Day', 'Vulnerability being actively exploited with no official patch available.');
 
---- 3. NON-COMPLIANCE (Hardening, Benchmarks & Cloud Governance) ---
 INSERT INTO issue_type (category_id, name, description) VALUES
 (3, 'Password Complexity Violation', 'Fails to enforce minimum character or complexity requirements.'),
 (3, 'Disk Encryption Disabled', 'Full disk encryption (BitLocker/FileVault) is not active.'),
@@ -61,7 +56,6 @@ INSERT INTO issue_type (category_id, name, description) VALUES
 (3, 'Flow Logs Disabled', 'Network traffic logging is not enabled for the VPC/Subnet.'),
 (3, 'Default VPC in Use', 'Resources are deployed in the unhardened default cloud network.');
 
---- 4. UNAUTHORIZED ASSET (Detection & Network Hygiene) ---
 INSERT INTO issue_type (category_id, name, description) VALUES
 (4, 'Rogue Wireless Access Point', 'Non-sanctioned Wi-Fi hotspot detected on the network.'),
 (4, 'Unknown MAC Address', 'Device with an unrecognized OUI connected to a physical port.'),
@@ -77,7 +71,6 @@ INSERT INTO issue_type (category_id, name, description) VALUES
 (4, 'Unmanaged Network Switch', 'Dumb switch connected to a managed access port.'),
 (4, 'Beaconing Behavior', 'Rhythmic outbound traffic to an unclassified external IP.');
 
---- 5. ACCOUNT ISSUE (Identity, IAM & Privilege) ---
 INSERT INTO issue_type (category_id, name, description) VALUES
 (5, 'Dormant Account', 'User account has not logged in for over 90 days.'),
 (5, 'MFA Disabled', 'Privileged user account lacks Multi-Factor Authentication.'),
@@ -95,3 +88,7 @@ INSERT INTO issue_type (category_id, name, description) VALUES
 (5, 'Password in Description Field', 'Sensitive information found in AD or IAM metadata fields.'),
 (5, 'Lack of Least Privilege', 'User account has write access to a read-only data store.'),
 (5, 'Unused IAM Role', 'Cloud role has not been assumed or used in over 60 days.');
+
+---- create above / drop below ----
+
+TRUNCATE issue_type RESTART IDENTITY CASCADE;

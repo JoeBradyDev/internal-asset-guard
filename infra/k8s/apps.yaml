@@ -23,6 +23,16 @@ spec:
           env:
             - name: DATABASE_URL
               value: 'postgresql://postgres:password@postgres:5432/assetguard'
+            - name: PGHOST
+              value: 'postgres'
+            - name: PGPORT
+              value: '5432'
+            - name: PGDATABASE
+              value: 'assetguard'
+            - name: PGUSER
+              value: 'postgres'
+            - name: PGPASSWORD
+              value: 'password'
 ---
 # 2. Gateway (NestJS)
 apiVersion: v1
