@@ -418,6 +418,31 @@ func (q *Queries) ListAssetSources(ctx context.Context) ([]AssetSource, error) {
 	return items, nil
 }
 
+const listDeviceTypes = `-- name: ListDeviceTypes :many
+SELECT id, asset_class_id, name FROM device_type
+ORDER BY name
+`
+
+func (q *Queries) ListDeviceTypes(ctx context.Context) ([]DeviceType, error) {
+	rows, err := q.db.Query(ctx, listDeviceTypes)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []DeviceType
+	for rows.Next() {
+		var i DeviceType
+		if err := rows.Scan(&i.ID, &i.AssetClassID, &i.Name); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listDeviceTypesByClass = `-- name: ListDeviceTypesByClass :many
 SELECT id, asset_class_id, name FROM device_type
 WHERE asset_class_id = $1

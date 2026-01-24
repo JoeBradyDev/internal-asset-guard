@@ -65,6 +65,10 @@ SELECT * FROM device_type
 WHERE asset_class_id = $1
 ORDER BY name;
 
+-- name: ListDeviceTypes :many
+SELECT * FROM device_type
+ORDER BY name;
+
 -- name: UpdateDeviceType :one
 UPDATE device_type
 SET asset_class_id = $2, name = $3

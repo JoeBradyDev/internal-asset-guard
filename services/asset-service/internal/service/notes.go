@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"asset-service/internal/db"
-	"asset-service/internal/dtos"
+	"asset-service/internal/dto"
 	"asset-service/proto"
 
 	"github.com/jackc/pgx/v5/pgtype"
@@ -21,7 +21,7 @@ func (s *AssetServer) CreateNote(ctx context.Context, req *proto.CreateNoteReque
 		issueIDPtr = &id
 	}
 
-	dto := dtos.CreateAssetNote{
+	dto := dto.CreateAssetNote{
 		AssetID:      int(req.AssetId),
 		AssetIssueID: issueIDPtr,
 		AuthorUserID: int(req.AuthorUserId),
@@ -84,7 +84,7 @@ func (s *AssetServer) UpdateNote(ctx context.Context, req *proto.UpdateNoteReque
 		currentIssueID = &val
 	}
 
-	dto := dtos.UpdateAssetNote{
+	dto := dto.UpdateAssetNote{
 		AssetIssueID: currentIssueID,
 		Content:      &current.Content,
 	}

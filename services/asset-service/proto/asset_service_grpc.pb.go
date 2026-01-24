@@ -19,30 +19,58 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	AssetService_CreateAsset_FullMethodName       = "/asset_service.AssetService/CreateAsset"
+	AssetService_GetAsset_FullMethodName          = "/asset_service.AssetService/GetAsset"
+	AssetService_ListAssets_FullMethodName        = "/asset_service.AssetService/ListAssets"
 	AssetService_UpdateAsset_FullMethodName       = "/asset_service.AssetService/UpdateAsset"
+	AssetService_DeleteAsset_FullMethodName       = "/asset_service.AssetService/DeleteAsset"
+	AssetService_CreateIssue_FullMethodName       = "/asset_service.AssetService/CreateIssue"
+	AssetService_GetIssue_FullMethodName          = "/asset_service.AssetService/GetIssue"
+	AssetService_ListIssuesByAsset_FullMethodName = "/asset_service.AssetService/ListIssuesByAsset"
 	AssetService_UpdateIssue_FullMethodName       = "/asset_service.AssetService/UpdateIssue"
+	AssetService_DeleteIssue_FullMethodName       = "/asset_service.AssetService/DeleteIssue"
+	AssetService_CreateNote_FullMethodName        = "/asset_service.AssetService/CreateNote"
+	AssetService_ListNotes_FullMethodName         = "/asset_service.AssetService/ListNotes"
 	AssetService_UpdateNote_FullMethodName        = "/asset_service.AssetService/UpdateNote"
+	AssetService_DeleteNote_FullMethodName        = "/asset_service.AssetService/DeleteNote"
+	AssetService_CreateAssetClass_FullMethodName  = "/asset_service.AssetService/CreateAssetClass"
+	AssetService_ListAssetClasses_FullMethodName  = "/asset_service.AssetService/ListAssetClasses"
 	AssetService_UpdateAssetClass_FullMethodName  = "/asset_service.AssetService/UpdateAssetClass"
+	AssetService_DeleteAssetClass_FullMethodName  = "/asset_service.AssetService/DeleteAssetClass"
+	AssetService_CreateCriticality_FullMethodName = "/asset_service.AssetService/CreateCriticality"
 	AssetService_UpdateCriticality_FullMethodName = "/asset_service.AssetService/UpdateCriticality"
-	AssetService_UpdateDeviceType_FullMethodName  = "/asset_service.AssetService/UpdateDeviceType"
+	AssetService_DeleteCriticality_FullMethodName = "/asset_service.AssetService/DeleteCriticality"
+	AssetService_CreateDeviceType_FullMethodName  = "/asset_service.AssetService/CreateDeviceType"
+	AssetService_ListDeviceTypes_FullMethodName   = "/asset_service.AssetService/ListDeviceTypes"
 )
 
 // AssetServiceClient is the client API for AssetService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// The gRPC Service Definition
 type AssetServiceClient interface {
-	// Asset Operations
+	CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error)
+	GetAsset(ctx context.Context, in *GetAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error)
+	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*ListAssetsResponse, error)
 	UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error)
-	// Issue Operations
+	DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*Empty, error)
+	CreateIssue(ctx context.Context, in *CreateIssueRequest, opts ...grpc.CallOption) (*IssueResponse, error)
+	GetIssue(ctx context.Context, in *GetIssueRequest, opts ...grpc.CallOption) (*IssueResponse, error)
+	ListIssuesByAsset(ctx context.Context, in *ListIssuesRequest, opts ...grpc.CallOption) (*ListIssuesResponse, error)
 	UpdateIssue(ctx context.Context, in *UpdateIssueRequest, opts ...grpc.CallOption) (*IssueResponse, error)
-	// Note Operations
+	DeleteIssue(ctx context.Context, in *DeleteIssueRequest, opts ...grpc.CallOption) (*Empty, error)
+	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*NoteResponse, error)
+	ListNotes(ctx context.Context, in *ListNotesRequest, opts ...grpc.CallOption) (*ListNotesResponse, error)
 	UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*NoteResponse, error)
-	// Metadata Operations
+	DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*Empty, error)
+	CreateAssetClass(ctx context.Context, in *CreateAssetClassRequest, opts ...grpc.CallOption) (*AssetClassResponse, error)
+	ListAssetClasses(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListAssetClassesResponse, error)
 	UpdateAssetClass(ctx context.Context, in *UpdateAssetClassRequest, opts ...grpc.CallOption) (*AssetClassResponse, error)
+	DeleteAssetClass(ctx context.Context, in *DeleteMetadataRequest, opts ...grpc.CallOption) (*Empty, error)
+	CreateCriticality(ctx context.Context, in *CreateCriticalityRequest, opts ...grpc.CallOption) (*CriticalityResponse, error)
 	UpdateCriticality(ctx context.Context, in *UpdateCriticalityRequest, opts ...grpc.CallOption) (*CriticalityResponse, error)
-	UpdateDeviceType(ctx context.Context, in *UpdateDeviceTypeRequest, opts ...grpc.CallOption) (*DeviceTypeResponse, error)
+	DeleteCriticality(ctx context.Context, in *DeleteMetadataRequest, opts ...grpc.CallOption) (*Empty, error)
+	CreateDeviceType(ctx context.Context, in *CreateDeviceTypeRequest, opts ...grpc.CallOption) (*DeviceTypeResponse, error)
+	ListDeviceTypes(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListDeviceTypesResponse, error)
 }
 
 type assetServiceClient struct {
@@ -53,10 +81,80 @@ func NewAssetServiceClient(cc grpc.ClientConnInterface) AssetServiceClient {
 	return &assetServiceClient{cc}
 }
 
+func (c *assetServiceClient) CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssetResponse)
+	err := c.cc.Invoke(ctx, AssetService_CreateAsset_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) GetAsset(ctx context.Context, in *GetAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssetResponse)
+	err := c.cc.Invoke(ctx, AssetService_GetAsset_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*ListAssetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAssetsResponse)
+	err := c.cc.Invoke(ctx, AssetService_ListAssets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *assetServiceClient) UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*AssetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AssetResponse)
 	err := c.cc.Invoke(ctx, AssetService_UpdateAsset_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AssetService_DeleteAsset_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) CreateIssue(ctx context.Context, in *CreateIssueRequest, opts ...grpc.CallOption) (*IssueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IssueResponse)
+	err := c.cc.Invoke(ctx, AssetService_CreateIssue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) GetIssue(ctx context.Context, in *GetIssueRequest, opts ...grpc.CallOption) (*IssueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IssueResponse)
+	err := c.cc.Invoke(ctx, AssetService_GetIssue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) ListIssuesByAsset(ctx context.Context, in *ListIssuesRequest, opts ...grpc.CallOption) (*ListIssuesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListIssuesResponse)
+	err := c.cc.Invoke(ctx, AssetService_ListIssuesByAsset_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,10 +171,70 @@ func (c *assetServiceClient) UpdateIssue(ctx context.Context, in *UpdateIssueReq
 	return out, nil
 }
 
+func (c *assetServiceClient) DeleteIssue(ctx context.Context, in *DeleteIssueRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AssetService_DeleteIssue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*NoteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NoteResponse)
+	err := c.cc.Invoke(ctx, AssetService_CreateNote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) ListNotes(ctx context.Context, in *ListNotesRequest, opts ...grpc.CallOption) (*ListNotesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListNotesResponse)
+	err := c.cc.Invoke(ctx, AssetService_ListNotes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *assetServiceClient) UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*NoteResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(NoteResponse)
 	err := c.cc.Invoke(ctx, AssetService_UpdateNote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AssetService_DeleteNote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) CreateAssetClass(ctx context.Context, in *CreateAssetClassRequest, opts ...grpc.CallOption) (*AssetClassResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssetClassResponse)
+	err := c.cc.Invoke(ctx, AssetService_CreateAssetClass_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) ListAssetClasses(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListAssetClassesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAssetClassesResponse)
+	err := c.cc.Invoke(ctx, AssetService_ListAssetClasses_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -93,6 +251,26 @@ func (c *assetServiceClient) UpdateAssetClass(ctx context.Context, in *UpdateAss
 	return out, nil
 }
 
+func (c *assetServiceClient) DeleteAssetClass(ctx context.Context, in *DeleteMetadataRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AssetService_DeleteAssetClass_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) CreateCriticality(ctx context.Context, in *CreateCriticalityRequest, opts ...grpc.CallOption) (*CriticalityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CriticalityResponse)
+	err := c.cc.Invoke(ctx, AssetService_CreateCriticality_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *assetServiceClient) UpdateCriticality(ctx context.Context, in *UpdateCriticalityRequest, opts ...grpc.CallOption) (*CriticalityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CriticalityResponse)
@@ -103,10 +281,30 @@ func (c *assetServiceClient) UpdateCriticality(ctx context.Context, in *UpdateCr
 	return out, nil
 }
 
-func (c *assetServiceClient) UpdateDeviceType(ctx context.Context, in *UpdateDeviceTypeRequest, opts ...grpc.CallOption) (*DeviceTypeResponse, error) {
+func (c *assetServiceClient) DeleteCriticality(ctx context.Context, in *DeleteMetadataRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AssetService_DeleteCriticality_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) CreateDeviceType(ctx context.Context, in *CreateDeviceTypeRequest, opts ...grpc.CallOption) (*DeviceTypeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeviceTypeResponse)
-	err := c.cc.Invoke(ctx, AssetService_UpdateDeviceType_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AssetService_CreateDeviceType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetServiceClient) ListDeviceTypes(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListDeviceTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeviceTypesResponse)
+	err := c.cc.Invoke(ctx, AssetService_ListDeviceTypes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -116,19 +314,30 @@ func (c *assetServiceClient) UpdateDeviceType(ctx context.Context, in *UpdateDev
 // AssetServiceServer is the server API for AssetService service.
 // All implementations must embed UnimplementedAssetServiceServer
 // for forward compatibility.
-//
-// The gRPC Service Definition
 type AssetServiceServer interface {
-	// Asset Operations
+	CreateAsset(context.Context, *CreateAssetRequest) (*AssetResponse, error)
+	GetAsset(context.Context, *GetAssetRequest) (*AssetResponse, error)
+	ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsResponse, error)
 	UpdateAsset(context.Context, *UpdateAssetRequest) (*AssetResponse, error)
-	// Issue Operations
+	DeleteAsset(context.Context, *DeleteAssetRequest) (*Empty, error)
+	CreateIssue(context.Context, *CreateIssueRequest) (*IssueResponse, error)
+	GetIssue(context.Context, *GetIssueRequest) (*IssueResponse, error)
+	ListIssuesByAsset(context.Context, *ListIssuesRequest) (*ListIssuesResponse, error)
 	UpdateIssue(context.Context, *UpdateIssueRequest) (*IssueResponse, error)
-	// Note Operations
+	DeleteIssue(context.Context, *DeleteIssueRequest) (*Empty, error)
+	CreateNote(context.Context, *CreateNoteRequest) (*NoteResponse, error)
+	ListNotes(context.Context, *ListNotesRequest) (*ListNotesResponse, error)
 	UpdateNote(context.Context, *UpdateNoteRequest) (*NoteResponse, error)
-	// Metadata Operations
+	DeleteNote(context.Context, *DeleteNoteRequest) (*Empty, error)
+	CreateAssetClass(context.Context, *CreateAssetClassRequest) (*AssetClassResponse, error)
+	ListAssetClasses(context.Context, *Empty) (*ListAssetClassesResponse, error)
 	UpdateAssetClass(context.Context, *UpdateAssetClassRequest) (*AssetClassResponse, error)
+	DeleteAssetClass(context.Context, *DeleteMetadataRequest) (*Empty, error)
+	CreateCriticality(context.Context, *CreateCriticalityRequest) (*CriticalityResponse, error)
 	UpdateCriticality(context.Context, *UpdateCriticalityRequest) (*CriticalityResponse, error)
-	UpdateDeviceType(context.Context, *UpdateDeviceTypeRequest) (*DeviceTypeResponse, error)
+	DeleteCriticality(context.Context, *DeleteMetadataRequest) (*Empty, error)
+	CreateDeviceType(context.Context, *CreateDeviceTypeRequest) (*DeviceTypeResponse, error)
+	ListDeviceTypes(context.Context, *Empty) (*ListDeviceTypesResponse, error)
 	mustEmbedUnimplementedAssetServiceServer()
 }
 
@@ -139,23 +348,74 @@ type AssetServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAssetServiceServer struct{}
 
+func (UnimplementedAssetServiceServer) CreateAsset(context.Context, *CreateAssetRequest) (*AssetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAsset not implemented")
+}
+func (UnimplementedAssetServiceServer) GetAsset(context.Context, *GetAssetRequest) (*AssetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAsset not implemented")
+}
+func (UnimplementedAssetServiceServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAssets not implemented")
+}
 func (UnimplementedAssetServiceServer) UpdateAsset(context.Context, *UpdateAssetRequest) (*AssetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAsset not implemented")
+}
+func (UnimplementedAssetServiceServer) DeleteAsset(context.Context, *DeleteAssetRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAsset not implemented")
+}
+func (UnimplementedAssetServiceServer) CreateIssue(context.Context, *CreateIssueRequest) (*IssueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateIssue not implemented")
+}
+func (UnimplementedAssetServiceServer) GetIssue(context.Context, *GetIssueRequest) (*IssueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIssue not implemented")
+}
+func (UnimplementedAssetServiceServer) ListIssuesByAsset(context.Context, *ListIssuesRequest) (*ListIssuesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListIssuesByAsset not implemented")
 }
 func (UnimplementedAssetServiceServer) UpdateIssue(context.Context, *UpdateIssueRequest) (*IssueResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateIssue not implemented")
 }
+func (UnimplementedAssetServiceServer) DeleteIssue(context.Context, *DeleteIssueRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteIssue not implemented")
+}
+func (UnimplementedAssetServiceServer) CreateNote(context.Context, *CreateNoteRequest) (*NoteResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateNote not implemented")
+}
+func (UnimplementedAssetServiceServer) ListNotes(context.Context, *ListNotesRequest) (*ListNotesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListNotes not implemented")
+}
 func (UnimplementedAssetServiceServer) UpdateNote(context.Context, *UpdateNoteRequest) (*NoteResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateNote not implemented")
+}
+func (UnimplementedAssetServiceServer) DeleteNote(context.Context, *DeleteNoteRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteNote not implemented")
+}
+func (UnimplementedAssetServiceServer) CreateAssetClass(context.Context, *CreateAssetClassRequest) (*AssetClassResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAssetClass not implemented")
+}
+func (UnimplementedAssetServiceServer) ListAssetClasses(context.Context, *Empty) (*ListAssetClassesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAssetClasses not implemented")
 }
 func (UnimplementedAssetServiceServer) UpdateAssetClass(context.Context, *UpdateAssetClassRequest) (*AssetClassResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAssetClass not implemented")
 }
+func (UnimplementedAssetServiceServer) DeleteAssetClass(context.Context, *DeleteMetadataRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAssetClass not implemented")
+}
+func (UnimplementedAssetServiceServer) CreateCriticality(context.Context, *CreateCriticalityRequest) (*CriticalityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCriticality not implemented")
+}
 func (UnimplementedAssetServiceServer) UpdateCriticality(context.Context, *UpdateCriticalityRequest) (*CriticalityResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateCriticality not implemented")
 }
-func (UnimplementedAssetServiceServer) UpdateDeviceType(context.Context, *UpdateDeviceTypeRequest) (*DeviceTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateDeviceType not implemented")
+func (UnimplementedAssetServiceServer) DeleteCriticality(context.Context, *DeleteMetadataRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteCriticality not implemented")
+}
+func (UnimplementedAssetServiceServer) CreateDeviceType(context.Context, *CreateDeviceTypeRequest) (*DeviceTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeviceType not implemented")
+}
+func (UnimplementedAssetServiceServer) ListDeviceTypes(context.Context, *Empty) (*ListDeviceTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeviceTypes not implemented")
 }
 func (UnimplementedAssetServiceServer) mustEmbedUnimplementedAssetServiceServer() {}
 func (UnimplementedAssetServiceServer) testEmbeddedByValue()                      {}
@@ -178,6 +438,60 @@ func RegisterAssetServiceServer(s grpc.ServiceRegistrar, srv AssetServiceServer)
 	s.RegisterService(&AssetService_ServiceDesc, srv)
 }
 
+func _AssetService_CreateAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateAsset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateAsset(ctx, req.(*CreateAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_GetAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).GetAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_GetAsset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).GetAsset(ctx, req.(*GetAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_ListAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAssetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).ListAssets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_ListAssets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).ListAssets(ctx, req.(*ListAssetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AssetService_UpdateAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAssetRequest)
 	if err := dec(in); err != nil {
@@ -192,6 +506,78 @@ func _AssetService_UpdateAsset_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AssetServiceServer).UpdateAsset(ctx, req.(*UpdateAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_DeleteAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).DeleteAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_DeleteAsset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).DeleteAsset(ctx, req.(*DeleteAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_CreateIssue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateIssueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateIssue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateIssue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateIssue(ctx, req.(*CreateIssueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_GetIssue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIssueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).GetIssue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_GetIssue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).GetIssue(ctx, req.(*GetIssueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_ListIssuesByAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIssuesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).ListIssuesByAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_ListIssuesByAsset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).ListIssuesByAsset(ctx, req.(*ListIssuesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -214,6 +600,60 @@ func _AssetService_UpdateIssue_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AssetService_DeleteIssue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteIssueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).DeleteIssue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_DeleteIssue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).DeleteIssue(ctx, req.(*DeleteIssueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_CreateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateNote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateNote(ctx, req.(*CreateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_ListNotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).ListNotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_ListNotes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).ListNotes(ctx, req.(*ListNotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AssetService_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateNoteRequest)
 	if err := dec(in); err != nil {
@@ -228,6 +668,60 @@ func _AssetService_UpdateNote_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AssetServiceServer).UpdateNote(ctx, req.(*UpdateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).DeleteNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_DeleteNote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).DeleteNote(ctx, req.(*DeleteNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_CreateAssetClass_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAssetClassRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateAssetClass(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateAssetClass_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateAssetClass(ctx, req.(*CreateAssetClassRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_ListAssetClasses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).ListAssetClasses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_ListAssetClasses_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).ListAssetClasses(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -250,6 +744,42 @@ func _AssetService_UpdateAssetClass_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AssetService_DeleteAssetClass_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).DeleteAssetClass(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_DeleteAssetClass_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).DeleteAssetClass(ctx, req.(*DeleteMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_CreateCriticality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCriticalityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateCriticality(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateCriticality_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateCriticality(ctx, req.(*CreateCriticalityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AssetService_UpdateCriticality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateCriticalityRequest)
 	if err := dec(in); err != nil {
@@ -268,20 +798,56 @@ func _AssetService_UpdateCriticality_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AssetService_UpdateDeviceType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDeviceTypeRequest)
+func _AssetService_DeleteCriticality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMetadataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssetServiceServer).UpdateDeviceType(ctx, in)
+		return srv.(AssetServiceServer).DeleteCriticality(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AssetService_UpdateDeviceType_FullMethodName,
+		FullMethod: AssetService_DeleteCriticality_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssetServiceServer).UpdateDeviceType(ctx, req.(*UpdateDeviceTypeRequest))
+		return srv.(AssetServiceServer).DeleteCriticality(ctx, req.(*DeleteMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_CreateDeviceType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeviceTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).CreateDeviceType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_CreateDeviceType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).CreateDeviceType(ctx, req.(*CreateDeviceTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssetService_ListDeviceTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServiceServer).ListDeviceTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssetService_ListDeviceTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServiceServer).ListDeviceTypes(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -294,28 +860,96 @@ var AssetService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AssetServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "CreateAsset",
+			Handler:    _AssetService_CreateAsset_Handler,
+		},
+		{
+			MethodName: "GetAsset",
+			Handler:    _AssetService_GetAsset_Handler,
+		},
+		{
+			MethodName: "ListAssets",
+			Handler:    _AssetService_ListAssets_Handler,
+		},
+		{
 			MethodName: "UpdateAsset",
 			Handler:    _AssetService_UpdateAsset_Handler,
+		},
+		{
+			MethodName: "DeleteAsset",
+			Handler:    _AssetService_DeleteAsset_Handler,
+		},
+		{
+			MethodName: "CreateIssue",
+			Handler:    _AssetService_CreateIssue_Handler,
+		},
+		{
+			MethodName: "GetIssue",
+			Handler:    _AssetService_GetIssue_Handler,
+		},
+		{
+			MethodName: "ListIssuesByAsset",
+			Handler:    _AssetService_ListIssuesByAsset_Handler,
 		},
 		{
 			MethodName: "UpdateIssue",
 			Handler:    _AssetService_UpdateIssue_Handler,
 		},
 		{
+			MethodName: "DeleteIssue",
+			Handler:    _AssetService_DeleteIssue_Handler,
+		},
+		{
+			MethodName: "CreateNote",
+			Handler:    _AssetService_CreateNote_Handler,
+		},
+		{
+			MethodName: "ListNotes",
+			Handler:    _AssetService_ListNotes_Handler,
+		},
+		{
 			MethodName: "UpdateNote",
 			Handler:    _AssetService_UpdateNote_Handler,
+		},
+		{
+			MethodName: "DeleteNote",
+			Handler:    _AssetService_DeleteNote_Handler,
+		},
+		{
+			MethodName: "CreateAssetClass",
+			Handler:    _AssetService_CreateAssetClass_Handler,
+		},
+		{
+			MethodName: "ListAssetClasses",
+			Handler:    _AssetService_ListAssetClasses_Handler,
 		},
 		{
 			MethodName: "UpdateAssetClass",
 			Handler:    _AssetService_UpdateAssetClass_Handler,
 		},
 		{
+			MethodName: "DeleteAssetClass",
+			Handler:    _AssetService_DeleteAssetClass_Handler,
+		},
+		{
+			MethodName: "CreateCriticality",
+			Handler:    _AssetService_CreateCriticality_Handler,
+		},
+		{
 			MethodName: "UpdateCriticality",
 			Handler:    _AssetService_UpdateCriticality_Handler,
 		},
 		{
-			MethodName: "UpdateDeviceType",
-			Handler:    _AssetService_UpdateDeviceType_Handler,
+			MethodName: "DeleteCriticality",
+			Handler:    _AssetService_DeleteCriticality_Handler,
+		},
+		{
+			MethodName: "CreateDeviceType",
+			Handler:    _AssetService_CreateDeviceType_Handler,
+		},
+		{
+			MethodName: "ListDeviceTypes",
+			Handler:    _AssetService_ListDeviceTypes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

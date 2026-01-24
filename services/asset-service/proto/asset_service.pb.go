@@ -22,23 +22,439 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// --- ASSET MESSAGES ---
+type Empty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Empty) Reset() {
+	*x = Empty{}
+	mi := &file_proto_asset_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Empty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Empty) ProtoMessage() {}
+
+func (x *Empty) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{0}
+}
+
+type DeleteMetadataRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteMetadataRequest) Reset() {
+	*x = DeleteMetadataRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteMetadataRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteMetadataRequest) ProtoMessage() {}
+
+func (x *DeleteMetadataRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteMetadataRequest.ProtoReflect.Descriptor instead.
+func (*DeleteMetadataRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DeleteMetadataRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type AssetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	AssetClass    string                 `protobuf:"bytes,3,opt,name=asset_class,json=assetClass,proto3" json:"asset_class,omitempty"`
+	AssetClassId  int32                  `protobuf:"varint,4,opt,name=asset_class_id,json=assetClassId,proto3" json:"asset_class_id,omitempty"`
+	CriticalityId int32                  `protobuf:"varint,5,opt,name=criticality_id,json=criticalityId,proto3" json:"criticality_id,omitempty"`
+	Criticality   string                 `protobuf:"bytes,6,opt,name=criticality,proto3" json:"criticality,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	DeviceInfo    *DeviceDetail          `protobuf:"bytes,8,opt,name=device_info,json=deviceInfo,proto3,oneof" json:"device_info,omitempty"`
+	NetworkInfo   *NetworkDetail         `protobuf:"bytes,9,opt,name=network_info,json=networkInfo,proto3,oneof" json:"network_info,omitempty"`
+	SoftwareInfo  *SoftwareDetail        `protobuf:"bytes,10,opt,name=software_info,json=softwareInfo,proto3,oneof" json:"software_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AssetResponse) Reset() {
+	*x = AssetResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssetResponse) ProtoMessage() {}
+
+func (x *AssetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssetResponse.ProtoReflect.Descriptor instead.
+func (*AssetResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AssetResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AssetResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AssetResponse) GetAssetClass() string {
+	if x != nil {
+		return x.AssetClass
+	}
+	return ""
+}
+
+func (x *AssetResponse) GetAssetClassId() int32 {
+	if x != nil {
+		return x.AssetClassId
+	}
+	return 0
+}
+
+func (x *AssetResponse) GetCriticalityId() int32 {
+	if x != nil {
+		return x.CriticalityId
+	}
+	return 0
+}
+
+func (x *AssetResponse) GetCriticality() string {
+	if x != nil {
+		return x.Criticality
+	}
+	return ""
+}
+
+func (x *AssetResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AssetResponse) GetDeviceInfo() *DeviceDetail {
+	if x != nil {
+		return x.DeviceInfo
+	}
+	return nil
+}
+
+func (x *AssetResponse) GetNetworkInfo() *NetworkDetail {
+	if x != nil {
+		return x.NetworkInfo
+	}
+	return nil
+}
+
+func (x *AssetResponse) GetSoftwareInfo() *SoftwareDetail {
+	if x != nil {
+		return x.SoftwareInfo
+	}
+	return nil
+}
+
+type CreateAssetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	AssetClassId  int32                  `protobuf:"varint,2,opt,name=asset_class_id,json=assetClassId,proto3" json:"asset_class_id,omitempty"`
+	CriticalityId int32                  `protobuf:"varint,3,opt,name=criticality_id,json=criticalityId,proto3" json:"criticality_id,omitempty"`
+	DeviceInfo    *DeviceDetail          `protobuf:"bytes,4,opt,name=device_info,json=deviceInfo,proto3,oneof" json:"device_info,omitempty"`
+	NetworkInfo   *NetworkDetail         `protobuf:"bytes,5,opt,name=network_info,json=networkInfo,proto3,oneof" json:"network_info,omitempty"`
+	SoftwareInfo  *SoftwareDetail        `protobuf:"bytes,6,opt,name=software_info,json=softwareInfo,proto3,oneof" json:"software_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAssetRequest) Reset() {
+	*x = CreateAssetRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAssetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAssetRequest) ProtoMessage() {}
+
+func (x *CreateAssetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAssetRequest.ProtoReflect.Descriptor instead.
+func (*CreateAssetRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateAssetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateAssetRequest) GetAssetClassId() int32 {
+	if x != nil {
+		return x.AssetClassId
+	}
+	return 0
+}
+
+func (x *CreateAssetRequest) GetCriticalityId() int32 {
+	if x != nil {
+		return x.CriticalityId
+	}
+	return 0
+}
+
+func (x *CreateAssetRequest) GetDeviceInfo() *DeviceDetail {
+	if x != nil {
+		return x.DeviceInfo
+	}
+	return nil
+}
+
+func (x *CreateAssetRequest) GetNetworkInfo() *NetworkDetail {
+	if x != nil {
+		return x.NetworkInfo
+	}
+	return nil
+}
+
+func (x *CreateAssetRequest) GetSoftwareInfo() *SoftwareDetail {
+	if x != nil {
+		return x.SoftwareInfo
+	}
+	return nil
+}
+
+type GetAssetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAssetRequest) Reset() {
+	*x = GetAssetRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAssetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAssetRequest) ProtoMessage() {}
+
+func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAssetRequest.ProtoReflect.Descriptor instead.
+func (*GetAssetRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetAssetRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ListAssetsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        int32                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAssetsRequest) Reset() {
+	*x = ListAssetsRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAssetsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAssetsRequest) ProtoMessage() {}
+
+func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAssetsRequest.ProtoReflect.Descriptor instead.
+func (*ListAssetsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListAssetsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListAssetsRequest) GetOffset() int32 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+type ListAssetsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Assets        []*AssetResponse       `protobuf:"bytes,1,rep,name=assets,proto3" json:"assets,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAssetsResponse) Reset() {
+	*x = ListAssetsResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAssetsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAssetsResponse) ProtoMessage() {}
+
+func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAssetsResponse.ProtoReflect.Descriptor instead.
+func (*ListAssetsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListAssetsResponse) GetAssets() []*AssetResponse {
+	if x != nil {
+		return x.Assets
+	}
+	return nil
+}
+
 type UpdateAssetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	AssetClassId  *int32                 `protobuf:"varint,3,opt,name=asset_class_id,json=assetClassId,proto3,oneof" json:"asset_class_id,omitempty"`
 	CriticalityId *int32                 `protobuf:"varint,4,opt,name=criticality_id,json=criticalityId,proto3,oneof" json:"criticality_id,omitempty"`
-	DeviceInfo    *DeviceDetail          `protobuf:"bytes,5,opt,name=device_info,json=deviceInfo,proto3,oneof" json:"device_info,omitempty"`
-	NetworkInfo   *NetworkDetail         `protobuf:"bytes,6,opt,name=network_info,json=networkInfo,proto3,oneof" json:"network_info,omitempty"`
-	SoftwareInfo  *SoftwareDetail        `protobuf:"bytes,7,opt,name=software_info,json=softwareInfo,proto3,oneof" json:"software_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAssetRequest) Reset() {
 	*x = UpdateAssetRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[0]
+	mi := &file_proto_asset_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50,7 +466,7 @@ func (x *UpdateAssetRequest) String() string {
 func (*UpdateAssetRequest) ProtoMessage() {}
 
 func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[0]
+	mi := &file_proto_asset_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +479,7 @@ func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{0}
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateAssetRequest) GetId() int32 {
@@ -94,23 +510,1402 @@ func (x *UpdateAssetRequest) GetCriticalityId() int32 {
 	return 0
 }
 
-func (x *UpdateAssetRequest) GetDeviceInfo() *DeviceDetail {
+type DeleteAssetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAssetRequest) Reset() {
+	*x = DeleteAssetRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAssetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAssetRequest) ProtoMessage() {}
+
+func (x *DeleteAssetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[8]
 	if x != nil {
-		return x.DeviceInfo
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAssetRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAssetRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DeleteAssetRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type IssueResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	AssetId         int32                  `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	IssueTypeId     int32                  `protobuf:"varint,3,opt,name=issue_type_id,json=issueTypeId,proto3" json:"issue_type_id,omitempty"`
+	IssueType       string                 `protobuf:"bytes,4,opt,name=issue_type,json=issueType,proto3" json:"issue_type,omitempty"`
+	Category        string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	StatusId        int32                  `protobuf:"varint,6,opt,name=status_id,json=statusId,proto3" json:"status_id,omitempty"`
+	Status          string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	IssueSourceId   int32                  `protobuf:"varint,8,opt,name=issue_source_id,json=issueSourceId,proto3" json:"issue_source_id,omitempty"`
+	IssueSource     string                 `protobuf:"bytes,9,opt,name=issue_source,json=issueSource,proto3" json:"issue_source,omitempty"`
+	ExternalIssueId string                 `protobuf:"bytes,10,opt,name=external_issue_id,json=externalIssueId,proto3" json:"external_issue_id,omitempty"`
+	Description     *string                `protobuf:"bytes,11,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *IssueResponse) Reset() {
+	*x = IssueResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IssueResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IssueResponse) ProtoMessage() {}
+
+func (x *IssueResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IssueResponse.ProtoReflect.Descriptor instead.
+func (*IssueResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *IssueResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *IssueResponse) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+func (x *IssueResponse) GetIssueTypeId() int32 {
+	if x != nil {
+		return x.IssueTypeId
+	}
+	return 0
+}
+
+func (x *IssueResponse) GetIssueType() string {
+	if x != nil {
+		return x.IssueType
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetStatusId() int32 {
+	if x != nil {
+		return x.StatusId
+	}
+	return 0
+}
+
+func (x *IssueResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetIssueSourceId() int32 {
+	if x != nil {
+		return x.IssueSourceId
+	}
+	return 0
+}
+
+func (x *IssueResponse) GetIssueSource() string {
+	if x != nil {
+		return x.IssueSource
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetExternalIssueId() string {
+	if x != nil {
+		return x.ExternalIssueId
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *IssueResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return nil
 }
 
-func (x *UpdateAssetRequest) GetNetworkInfo() *NetworkDetail {
+type CreateIssueRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	AssetId         int32                  `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	IssueTypeId     int32                  `protobuf:"varint,2,opt,name=issue_type_id,json=issueTypeId,proto3" json:"issue_type_id,omitempty"`
+	StatusId        int32                  `protobuf:"varint,3,opt,name=status_id,json=statusId,proto3" json:"status_id,omitempty"`
+	IssueSourceId   int32                  `protobuf:"varint,4,opt,name=issue_source_id,json=issueSourceId,proto3" json:"issue_source_id,omitempty"`
+	ExternalIssueId string                 `protobuf:"bytes,5,opt,name=external_issue_id,json=externalIssueId,proto3" json:"external_issue_id,omitempty"`
+	Description     *string                `protobuf:"bytes,6,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CreateIssueRequest) Reset() {
+	*x = CreateIssueRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateIssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateIssueRequest) ProtoMessage() {}
+
+func (x *CreateIssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[10]
 	if x != nil {
-		return x.NetworkInfo
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateIssueRequest.ProtoReflect.Descriptor instead.
+func (*CreateIssueRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CreateIssueRequest) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+func (x *CreateIssueRequest) GetIssueTypeId() int32 {
+	if x != nil {
+		return x.IssueTypeId
+	}
+	return 0
+}
+
+func (x *CreateIssueRequest) GetStatusId() int32 {
+	if x != nil {
+		return x.StatusId
+	}
+	return 0
+}
+
+func (x *CreateIssueRequest) GetIssueSourceId() int32 {
+	if x != nil {
+		return x.IssueSourceId
+	}
+	return 0
+}
+
+func (x *CreateIssueRequest) GetExternalIssueId() string {
+	if x != nil {
+		return x.ExternalIssueId
+	}
+	return ""
+}
+
+func (x *CreateIssueRequest) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+type GetIssueRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIssueRequest) Reset() {
+	*x = GetIssueRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIssueRequest) ProtoMessage() {}
+
+func (x *GetIssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIssueRequest.ProtoReflect.Descriptor instead.
+func (*GetIssueRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetIssueRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ListIssuesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AssetId       int32                  `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListIssuesRequest) Reset() {
+	*x = ListIssuesRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListIssuesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListIssuesRequest) ProtoMessage() {}
+
+func (x *ListIssuesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListIssuesRequest.ProtoReflect.Descriptor instead.
+func (*ListIssuesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListIssuesRequest) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+type ListIssuesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Issues        []*IssueResponse       `protobuf:"bytes,1,rep,name=issues,proto3" json:"issues,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListIssuesResponse) Reset() {
+	*x = ListIssuesResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListIssuesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListIssuesResponse) ProtoMessage() {}
+
+func (x *ListIssuesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListIssuesResponse.ProtoReflect.Descriptor instead.
+func (*ListIssuesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListIssuesResponse) GetIssues() []*IssueResponse {
+	if x != nil {
+		return x.Issues
 	}
 	return nil
 }
 
-func (x *UpdateAssetRequest) GetSoftwareInfo() *SoftwareDetail {
+type UpdateIssueRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IssueTypeId     *int32                 `protobuf:"varint,2,opt,name=issue_type_id,json=issueTypeId,proto3,oneof" json:"issue_type_id,omitempty"`
+	StatusId        *int32                 `protobuf:"varint,3,opt,name=status_id,json=statusId,proto3,oneof" json:"status_id,omitempty"`
+	Description     *string                `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	ExternalIssueId *string                `protobuf:"bytes,5,opt,name=external_issue_id,json=externalIssueId,proto3,oneof" json:"external_issue_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdateIssueRequest) Reset() {
+	*x = UpdateIssueRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateIssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateIssueRequest) ProtoMessage() {}
+
+func (x *UpdateIssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[14]
 	if x != nil {
-		return x.SoftwareInfo
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateIssueRequest.ProtoReflect.Descriptor instead.
+func (*UpdateIssueRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *UpdateIssueRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateIssueRequest) GetIssueTypeId() int32 {
+	if x != nil && x.IssueTypeId != nil {
+		return *x.IssueTypeId
+	}
+	return 0
+}
+
+func (x *UpdateIssueRequest) GetStatusId() int32 {
+	if x != nil && x.StatusId != nil {
+		return *x.StatusId
+	}
+	return 0
+}
+
+func (x *UpdateIssueRequest) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *UpdateIssueRequest) GetExternalIssueId() string {
+	if x != nil && x.ExternalIssueId != nil {
+		return *x.ExternalIssueId
+	}
+	return ""
+}
+
+type DeleteIssueRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteIssueRequest) Reset() {
+	*x = DeleteIssueRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteIssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteIssueRequest) ProtoMessage() {}
+
+func (x *DeleteIssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteIssueRequest.ProtoReflect.Descriptor instead.
+func (*DeleteIssueRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *DeleteIssueRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type NoteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	AssetId       int32                  `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	AssetIssueId  *int32                 `protobuf:"varint,3,opt,name=asset_issue_id,json=assetIssueId,proto3,oneof" json:"asset_issue_id,omitempty"`
+	AuthorUserId  int32                  `protobuf:"varint,4,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NoteResponse) Reset() {
+	*x = NoteResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NoteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NoteResponse) ProtoMessage() {}
+
+func (x *NoteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NoteResponse.ProtoReflect.Descriptor instead.
+func (*NoteResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *NoteResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *NoteResponse) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+func (x *NoteResponse) GetAssetIssueId() int32 {
+	if x != nil && x.AssetIssueId != nil {
+		return *x.AssetIssueId
+	}
+	return 0
+}
+
+func (x *NoteResponse) GetAuthorUserId() int32 {
+	if x != nil {
+		return x.AuthorUserId
+	}
+	return 0
+}
+
+func (x *NoteResponse) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *NoteResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type CreateNoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AssetId       int32                  `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	AssetIssueId  *int32                 `protobuf:"varint,2,opt,name=asset_issue_id,json=assetIssueId,proto3,oneof" json:"asset_issue_id,omitempty"`
+	AuthorUserId  int32                  `protobuf:"varint,3,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateNoteRequest) Reset() {
+	*x = CreateNoteRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateNoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateNoteRequest) ProtoMessage() {}
+
+func (x *CreateNoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateNoteRequest.ProtoReflect.Descriptor instead.
+func (*CreateNoteRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *CreateNoteRequest) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+func (x *CreateNoteRequest) GetAssetIssueId() int32 {
+	if x != nil && x.AssetIssueId != nil {
+		return *x.AssetIssueId
+	}
+	return 0
+}
+
+func (x *CreateNoteRequest) GetAuthorUserId() int32 {
+	if x != nil {
+		return x.AuthorUserId
+	}
+	return 0
+}
+
+func (x *CreateNoteRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type ListNotesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AssetId       int32                  `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListNotesRequest) Reset() {
+	*x = ListNotesRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListNotesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListNotesRequest) ProtoMessage() {}
+
+func (x *ListNotesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListNotesRequest.ProtoReflect.Descriptor instead.
+func (*ListNotesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListNotesRequest) GetAssetId() int32 {
+	if x != nil {
+		return x.AssetId
+	}
+	return 0
+}
+
+type ListNotesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Notes         []*NoteResponse        `protobuf:"bytes,1,rep,name=notes,proto3" json:"notes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListNotesResponse) Reset() {
+	*x = ListNotesResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListNotesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListNotesResponse) ProtoMessage() {}
+
+func (x *ListNotesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListNotesResponse.ProtoReflect.Descriptor instead.
+func (*ListNotesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListNotesResponse) GetNotes() []*NoteResponse {
+	if x != nil {
+		return x.Notes
+	}
+	return nil
+}
+
+type UpdateNoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	AssetIssueId  *int32                 `protobuf:"varint,2,opt,name=asset_issue_id,json=assetIssueId,proto3,oneof" json:"asset_issue_id,omitempty"`
+	Content       *string                `protobuf:"bytes,3,opt,name=content,proto3,oneof" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateNoteRequest) Reset() {
+	*x = UpdateNoteRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateNoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateNoteRequest) ProtoMessage() {}
+
+func (x *UpdateNoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateNoteRequest.ProtoReflect.Descriptor instead.
+func (*UpdateNoteRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UpdateNoteRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateNoteRequest) GetAssetIssueId() int32 {
+	if x != nil && x.AssetIssueId != nil {
+		return *x.AssetIssueId
+	}
+	return 0
+}
+
+func (x *UpdateNoteRequest) GetContent() string {
+	if x != nil && x.Content != nil {
+		return *x.Content
+	}
+	return ""
+}
+
+type DeleteNoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteNoteRequest) Reset() {
+	*x = DeleteNoteRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteNoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteNoteRequest) ProtoMessage() {}
+
+func (x *DeleteNoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteNoteRequest.ProtoReflect.Descriptor instead.
+func (*DeleteNoteRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *DeleteNoteRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type AssetClassResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Definition    string                 `protobuf:"bytes,3,opt,name=definition,proto3" json:"definition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AssetClassResponse) Reset() {
+	*x = AssetClassResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssetClassResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssetClassResponse) ProtoMessage() {}
+
+func (x *AssetClassResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssetClassResponse.ProtoReflect.Descriptor instead.
+func (*AssetClassResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *AssetClassResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AssetClassResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AssetClassResponse) GetDefinition() string {
+	if x != nil {
+		return x.Definition
+	}
+	return ""
+}
+
+type CreateAssetClassRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Definition    string                 `protobuf:"bytes,2,opt,name=definition,proto3" json:"definition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAssetClassRequest) Reset() {
+	*x = CreateAssetClassRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAssetClassRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAssetClassRequest) ProtoMessage() {}
+
+func (x *CreateAssetClassRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAssetClassRequest.ProtoReflect.Descriptor instead.
+func (*CreateAssetClassRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *CreateAssetClassRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateAssetClassRequest) GetDefinition() string {
+	if x != nil {
+		return x.Definition
+	}
+	return ""
+}
+
+type ListAssetClassesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Classes       []*AssetClassResponse  `protobuf:"bytes,1,rep,name=classes,proto3" json:"classes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAssetClassesResponse) Reset() {
+	*x = ListAssetClassesResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAssetClassesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAssetClassesResponse) ProtoMessage() {}
+
+func (x *ListAssetClassesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAssetClassesResponse.ProtoReflect.Descriptor instead.
+func (*ListAssetClassesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ListAssetClassesResponse) GetClasses() []*AssetClassResponse {
+	if x != nil {
+		return x.Classes
+	}
+	return nil
+}
+
+type UpdateAssetClassRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Definition    *string                `protobuf:"bytes,3,opt,name=definition,proto3,oneof" json:"definition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAssetClassRequest) Reset() {
+	*x = UpdateAssetClassRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAssetClassRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAssetClassRequest) ProtoMessage() {}
+
+func (x *UpdateAssetClassRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAssetClassRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAssetClassRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *UpdateAssetClassRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateAssetClassRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *UpdateAssetClassRequest) GetDefinition() string {
+	if x != nil && x.Definition != nil {
+		return *x.Definition
+	}
+	return ""
+}
+
+type CriticalityResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Value         int32                  `protobuf:"varint,3,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CriticalityResponse) Reset() {
+	*x = CriticalityResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CriticalityResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CriticalityResponse) ProtoMessage() {}
+
+func (x *CriticalityResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CriticalityResponse.ProtoReflect.Descriptor instead.
+func (*CriticalityResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *CriticalityResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CriticalityResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CriticalityResponse) GetValue() int32 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+type CreateCriticalityRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Value         int32                  `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateCriticalityRequest) Reset() {
+	*x = CreateCriticalityRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCriticalityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCriticalityRequest) ProtoMessage() {}
+
+func (x *CreateCriticalityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCriticalityRequest.ProtoReflect.Descriptor instead.
+func (*CreateCriticalityRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *CreateCriticalityRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateCriticalityRequest) GetValue() int32 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+type UpdateCriticalityRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Value         *int32                 `protobuf:"varint,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCriticalityRequest) Reset() {
+	*x = UpdateCriticalityRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCriticalityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCriticalityRequest) ProtoMessage() {}
+
+func (x *UpdateCriticalityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCriticalityRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCriticalityRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UpdateCriticalityRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateCriticalityRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *UpdateCriticalityRequest) GetValue() int32 {
+	if x != nil && x.Value != nil {
+		return *x.Value
+	}
+	return 0
+}
+
+type DeviceTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	AssetClassId  int32                  `protobuf:"varint,3,opt,name=asset_class_id,json=assetClassId,proto3" json:"asset_class_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeviceTypeResponse) Reset() {
+	*x = DeviceTypeResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceTypeResponse) ProtoMessage() {}
+
+func (x *DeviceTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceTypeResponse.ProtoReflect.Descriptor instead.
+func (*DeviceTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *DeviceTypeResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *DeviceTypeResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DeviceTypeResponse) GetAssetClassId() int32 {
+	if x != nil {
+		return x.AssetClassId
+	}
+	return 0
+}
+
+type CreateDeviceTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AssetClassId  int32                  `protobuf:"varint,1,opt,name=asset_class_id,json=assetClassId,proto3" json:"asset_class_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDeviceTypeRequest) Reset() {
+	*x = CreateDeviceTypeRequest{}
+	mi := &file_proto_asset_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDeviceTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDeviceTypeRequest) ProtoMessage() {}
+
+func (x *CreateDeviceTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDeviceTypeRequest.ProtoReflect.Descriptor instead.
+func (*CreateDeviceTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *CreateDeviceTypeRequest) GetAssetClassId() int32 {
+	if x != nil {
+		return x.AssetClassId
+	}
+	return 0
+}
+
+func (x *CreateDeviceTypeRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ListDeviceTypesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceTypes   []*DeviceTypeResponse  `protobuf:"bytes,1,rep,name=device_types,json=deviceTypes,proto3" json:"device_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDeviceTypesResponse) Reset() {
+	*x = ListDeviceTypesResponse{}
+	mi := &file_proto_asset_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDeviceTypesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDeviceTypesResponse) ProtoMessage() {}
+
+func (x *ListDeviceTypesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_asset_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDeviceTypesResponse.ProtoReflect.Descriptor instead.
+func (*ListDeviceTypesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListDeviceTypesResponse) GetDeviceTypes() []*DeviceTypeResponse {
+	if x != nil {
+		return x.DeviceTypes
 	}
 	return nil
 }
@@ -130,7 +1925,7 @@ type DeviceDetail struct {
 
 func (x *DeviceDetail) Reset() {
 	*x = DeviceDetail{}
-	mi := &file_proto_asset_service_proto_msgTypes[1]
+	mi := &file_proto_asset_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -142,7 +1937,7 @@ func (x *DeviceDetail) String() string {
 func (*DeviceDetail) ProtoMessage() {}
 
 func (x *DeviceDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[1]
+	mi := &file_proto_asset_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -155,7 +1950,7 @@ func (x *DeviceDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeviceDetail.ProtoReflect.Descriptor instead.
 func (*DeviceDetail) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{1}
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *DeviceDetail) GetHostname() string {
@@ -222,7 +2017,7 @@ type NetworkDetail struct {
 
 func (x *NetworkDetail) Reset() {
 	*x = NetworkDetail{}
-	mi := &file_proto_asset_service_proto_msgTypes[2]
+	mi := &file_proto_asset_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +2029,7 @@ func (x *NetworkDetail) String() string {
 func (*NetworkDetail) ProtoMessage() {}
 
 func (x *NetworkDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[2]
+	mi := &file_proto_asset_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +2042,7 @@ func (x *NetworkDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkDetail.ProtoReflect.Descriptor instead.
 func (*NetworkDetail) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{2}
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *NetworkDetail) GetManagementIp() string {
@@ -313,7 +2108,7 @@ type SoftwareDetail struct {
 
 func (x *SoftwareDetail) Reset() {
 	*x = SoftwareDetail{}
-	mi := &file_proto_asset_service_proto_msgTypes[3]
+	mi := &file_proto_asset_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -325,7 +2120,7 @@ func (x *SoftwareDetail) String() string {
 func (*SoftwareDetail) ProtoMessage() {}
 
 func (x *SoftwareDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[3]
+	mi := &file_proto_asset_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,7 +2133,7 @@ func (x *SoftwareDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SoftwareDetail.ProtoReflect.Descriptor instead.
 func (*SoftwareDetail) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{3}
+	return file_proto_asset_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *SoftwareDetail) GetName() string {
@@ -383,721 +2178,175 @@ func (x *SoftwareDetail) GetSoftwareCpe() string {
 	return ""
 }
 
-type AssetResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	AssetClassId  int32                  `protobuf:"varint,3,opt,name=asset_class_id,json=assetClassId,proto3" json:"asset_class_id,omitempty"`
-	CriticalityId int32                  `protobuf:"varint,4,opt,name=criticality_id,json=criticalityId,proto3" json:"criticality_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AssetResponse) Reset() {
-	*x = AssetResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AssetResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AssetResponse) ProtoMessage() {}
-
-func (x *AssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AssetResponse.ProtoReflect.Descriptor instead.
-func (*AssetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *AssetResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *AssetResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *AssetResponse) GetAssetClassId() int32 {
-	if x != nil {
-		return x.AssetClassId
-	}
-	return 0
-}
-
-func (x *AssetResponse) GetCriticalityId() int32 {
-	if x != nil {
-		return x.CriticalityId
-	}
-	return 0
-}
-
-func (x *AssetResponse) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-// --- ISSUE MESSAGES ---
-type UpdateIssueRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	IssueTypeId     *int32                 `protobuf:"varint,2,opt,name=issue_type_id,json=issueTypeId,proto3,oneof" json:"issue_type_id,omitempty"`
-	StatusId        *int32                 `protobuf:"varint,3,opt,name=status_id,json=statusId,proto3,oneof" json:"status_id,omitempty"`
-	IssueSourceId   *int32                 `protobuf:"varint,4,opt,name=issue_source_id,json=issueSourceId,proto3,oneof" json:"issue_source_id,omitempty"`
-	ExternalIssueId *string                `protobuf:"bytes,5,opt,name=external_issue_id,json=externalIssueId,proto3,oneof" json:"external_issue_id,omitempty"`
-	Description     *string                `protobuf:"bytes,6,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *UpdateIssueRequest) Reset() {
-	*x = UpdateIssueRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateIssueRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateIssueRequest) ProtoMessage() {}
-
-func (x *UpdateIssueRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateIssueRequest.ProtoReflect.Descriptor instead.
-func (*UpdateIssueRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateIssueRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateIssueRequest) GetIssueTypeId() int32 {
-	if x != nil && x.IssueTypeId != nil {
-		return *x.IssueTypeId
-	}
-	return 0
-}
-
-func (x *UpdateIssueRequest) GetStatusId() int32 {
-	if x != nil && x.StatusId != nil {
-		return *x.StatusId
-	}
-	return 0
-}
-
-func (x *UpdateIssueRequest) GetIssueSourceId() int32 {
-	if x != nil && x.IssueSourceId != nil {
-		return *x.IssueSourceId
-	}
-	return 0
-}
-
-func (x *UpdateIssueRequest) GetExternalIssueId() string {
-	if x != nil && x.ExternalIssueId != nil {
-		return *x.ExternalIssueId
-	}
-	return ""
-}
-
-func (x *UpdateIssueRequest) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
-	}
-	return ""
-}
-
-type IssueResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AssetId         int32                  `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	StatusId        int32                  `protobuf:"varint,3,opt,name=status_id,json=statusId,proto3" json:"status_id,omitempty"`
-	ExternalIssueId string                 `protobuf:"bytes,4,opt,name=external_issue_id,json=externalIssueId,proto3" json:"external_issue_id,omitempty"`
-	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *IssueResponse) Reset() {
-	*x = IssueResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IssueResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IssueResponse) ProtoMessage() {}
-
-func (x *IssueResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IssueResponse.ProtoReflect.Descriptor instead.
-func (*IssueResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *IssueResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *IssueResponse) GetAssetId() int32 {
-	if x != nil {
-		return x.AssetId
-	}
-	return 0
-}
-
-func (x *IssueResponse) GetStatusId() int32 {
-	if x != nil {
-		return x.StatusId
-	}
-	return 0
-}
-
-func (x *IssueResponse) GetExternalIssueId() string {
-	if x != nil {
-		return x.ExternalIssueId
-	}
-	return ""
-}
-
-func (x *IssueResponse) GetUpdatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
-}
-
-// --- NOTE MESSAGES ---
-type UpdateNoteRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AssetIssueId  *int32                 `protobuf:"varint,2,opt,name=asset_issue_id,json=assetIssueId,proto3,oneof" json:"asset_issue_id,omitempty"`
-	Content       *string                `protobuf:"bytes,3,opt,name=content,proto3,oneof" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateNoteRequest) Reset() {
-	*x = UpdateNoteRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateNoteRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateNoteRequest) ProtoMessage() {}
-
-func (x *UpdateNoteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateNoteRequest.ProtoReflect.Descriptor instead.
-func (*UpdateNoteRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *UpdateNoteRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateNoteRequest) GetAssetIssueId() int32 {
-	if x != nil && x.AssetIssueId != nil {
-		return *x.AssetIssueId
-	}
-	return 0
-}
-
-func (x *UpdateNoteRequest) GetContent() string {
-	if x != nil && x.Content != nil {
-		return *x.Content
-	}
-	return ""
-}
-
-type NoteResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *NoteResponse) Reset() {
-	*x = NoteResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *NoteResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NoteResponse) ProtoMessage() {}
-
-func (x *NoteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NoteResponse.ProtoReflect.Descriptor instead.
-func (*NoteResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *NoteResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *NoteResponse) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-// --- METADATA MESSAGES ---
-type UpdateAssetClassRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Definition    *string                `protobuf:"bytes,3,opt,name=definition,proto3,oneof" json:"definition,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateAssetClassRequest) Reset() {
-	*x = UpdateAssetClassRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateAssetClassRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateAssetClassRequest) ProtoMessage() {}
-
-func (x *UpdateAssetClassRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateAssetClassRequest.ProtoReflect.Descriptor instead.
-func (*UpdateAssetClassRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *UpdateAssetClassRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateAssetClassRequest) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
-	}
-	return ""
-}
-
-func (x *UpdateAssetClassRequest) GetDefinition() string {
-	if x != nil && x.Definition != nil {
-		return *x.Definition
-	}
-	return ""
-}
-
-type AssetClassResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AssetClassResponse) Reset() {
-	*x = AssetClassResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AssetClassResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AssetClassResponse) ProtoMessage() {}
-
-func (x *AssetClassResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AssetClassResponse.ProtoReflect.Descriptor instead.
-func (*AssetClassResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *AssetClassResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *AssetClassResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type UpdateCriticalityRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Value         *int32                 `protobuf:"varint,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateCriticalityRequest) Reset() {
-	*x = UpdateCriticalityRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateCriticalityRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateCriticalityRequest) ProtoMessage() {}
-
-func (x *UpdateCriticalityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateCriticalityRequest.ProtoReflect.Descriptor instead.
-func (*UpdateCriticalityRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *UpdateCriticalityRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateCriticalityRequest) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
-	}
-	return ""
-}
-
-func (x *UpdateCriticalityRequest) GetValue() int32 {
-	if x != nil && x.Value != nil {
-		return *x.Value
-	}
-	return 0
-}
-
-type CriticalityResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Value         int32                  `protobuf:"varint,3,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CriticalityResponse) Reset() {
-	*x = CriticalityResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CriticalityResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CriticalityResponse) ProtoMessage() {}
-
-func (x *CriticalityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CriticalityResponse.ProtoReflect.Descriptor instead.
-func (*CriticalityResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *CriticalityResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *CriticalityResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CriticalityResponse) GetValue() int32 {
-	if x != nil {
-		return x.Value
-	}
-	return 0
-}
-
-type UpdateDeviceTypeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AssetClassId  *int32                 `protobuf:"varint,2,opt,name=asset_class_id,json=assetClassId,proto3,oneof" json:"asset_class_id,omitempty"`
-	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateDeviceTypeRequest) Reset() {
-	*x = UpdateDeviceTypeRequest{}
-	mi := &file_proto_asset_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateDeviceTypeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateDeviceTypeRequest) ProtoMessage() {}
-
-func (x *UpdateDeviceTypeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateDeviceTypeRequest.ProtoReflect.Descriptor instead.
-func (*UpdateDeviceTypeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *UpdateDeviceTypeRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateDeviceTypeRequest) GetAssetClassId() int32 {
-	if x != nil && x.AssetClassId != nil {
-		return *x.AssetClassId
-	}
-	return 0
-}
-
-func (x *UpdateDeviceTypeRequest) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
-	}
-	return ""
-}
-
-type DeviceTypeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeviceTypeResponse) Reset() {
-	*x = DeviceTypeResponse{}
-	mi := &file_proto_asset_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeviceTypeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeviceTypeResponse) ProtoMessage() {}
-
-func (x *DeviceTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_asset_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeviceTypeResponse.ProtoReflect.Descriptor instead.
-func (*DeviceTypeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_asset_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *DeviceTypeResponse) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *DeviceTypeResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 var File_proto_asset_service_proto protoreflect.FileDescriptor
 
 const file_proto_asset_service_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/asset_service.proto\x12\rasset_service\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\x03\n" +
+	"\x19proto/asset_service.proto\x12\rasset_service\x1a\x1fgoogle/protobuf/timestamp.proto\"\a\n" +
+	"\x05Empty\"'\n" +
+	"\x15DeleteMetadataRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"\x83\x04\n" +
+	"\rAssetResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vasset_class\x18\x03 \x01(\tR\n" +
+	"assetClass\x12$\n" +
+	"\x0easset_class_id\x18\x04 \x01(\x05R\fassetClassId\x12%\n" +
+	"\x0ecriticality_id\x18\x05 \x01(\x05R\rcriticalityId\x12 \n" +
+	"\vcriticality\x18\x06 \x01(\tR\vcriticality\x129\n" +
+	"\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12A\n" +
+	"\vdevice_info\x18\b \x01(\v2\x1b.asset_service.DeviceDetailH\x00R\n" +
+	"deviceInfo\x88\x01\x01\x12D\n" +
+	"\fnetwork_info\x18\t \x01(\v2\x1c.asset_service.NetworkDetailH\x01R\vnetworkInfo\x88\x01\x01\x12G\n" +
+	"\rsoftware_info\x18\n" +
+	" \x01(\v2\x1d.asset_service.SoftwareDetailH\x02R\fsoftwareInfo\x88\x01\x01B\x0e\n" +
+	"\f_device_infoB\x0f\n" +
+	"\r_network_infoB\x10\n" +
+	"\x0e_software_info\"\xfa\x02\n" +
+	"\x12CreateAssetRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12$\n" +
+	"\x0easset_class_id\x18\x02 \x01(\x05R\fassetClassId\x12%\n" +
+	"\x0ecriticality_id\x18\x03 \x01(\x05R\rcriticalityId\x12A\n" +
+	"\vdevice_info\x18\x04 \x01(\v2\x1b.asset_service.DeviceDetailH\x00R\n" +
+	"deviceInfo\x88\x01\x01\x12D\n" +
+	"\fnetwork_info\x18\x05 \x01(\v2\x1c.asset_service.NetworkDetailH\x01R\vnetworkInfo\x88\x01\x01\x12G\n" +
+	"\rsoftware_info\x18\x06 \x01(\v2\x1d.asset_service.SoftwareDetailH\x02R\fsoftwareInfo\x88\x01\x01B\x0e\n" +
+	"\f_device_infoB\x0f\n" +
+	"\r_network_infoB\x10\n" +
+	"\x0e_software_info\"!\n" +
+	"\x0fGetAssetRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"A\n" +
+	"\x11ListAssetsRequest\x12\x14\n" +
+	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x05R\x06offset\"J\n" +
+	"\x12ListAssetsResponse\x124\n" +
+	"\x06assets\x18\x01 \x03(\v2\x1c.asset_service.AssetResponseR\x06assets\"\xc3\x01\n" +
 	"\x12UpdateAssetRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12)\n" +
 	"\x0easset_class_id\x18\x03 \x01(\x05H\x01R\fassetClassId\x88\x01\x01\x12*\n" +
-	"\x0ecriticality_id\x18\x04 \x01(\x05H\x02R\rcriticalityId\x88\x01\x01\x12A\n" +
-	"\vdevice_info\x18\x05 \x01(\v2\x1b.asset_service.DeviceDetailH\x03R\n" +
-	"deviceInfo\x88\x01\x01\x12D\n" +
-	"\fnetwork_info\x18\x06 \x01(\v2\x1c.asset_service.NetworkDetailH\x04R\vnetworkInfo\x88\x01\x01\x12G\n" +
-	"\rsoftware_info\x18\a \x01(\v2\x1d.asset_service.SoftwareDetailH\x05R\fsoftwareInfo\x88\x01\x01B\a\n" +
+	"\x0ecriticality_id\x18\x04 \x01(\x05H\x02R\rcriticalityId\x88\x01\x01B\a\n" +
 	"\x05_nameB\x11\n" +
 	"\x0f_asset_class_idB\x11\n" +
-	"\x0f_criticality_idB\x0e\n" +
-	"\f_device_infoB\x0f\n" +
-	"\r_network_infoB\x10\n" +
-	"\x0e_software_info\"\xf9\x02\n" +
+	"\x0f_criticality_id\"$\n" +
+	"\x12DeleteAssetRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"\xb7\x03\n" +
+	"\rIssueResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x19\n" +
+	"\basset_id\x18\x02 \x01(\x05R\aassetId\x12\"\n" +
+	"\rissue_type_id\x18\x03 \x01(\x05R\vissueTypeId\x12\x1d\n" +
+	"\n" +
+	"issue_type\x18\x04 \x01(\tR\tissueType\x12\x1a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1b\n" +
+	"\tstatus_id\x18\x06 \x01(\x05R\bstatusId\x12\x16\n" +
+	"\x06status\x18\a \x01(\tR\x06status\x12&\n" +
+	"\x0fissue_source_id\x18\b \x01(\x05R\rissueSourceId\x12!\n" +
+	"\fissue_source\x18\t \x01(\tR\vissueSource\x12*\n" +
+	"\x11external_issue_id\x18\n" +
+	" \x01(\tR\x0fexternalIssueId\x12%\n" +
+	"\vdescription\x18\v \x01(\tH\x00R\vdescription\x88\x01\x01\x129\n" +
+	"\n" +
+	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\x0e\n" +
+	"\f_description\"\xfb\x01\n" +
+	"\x12CreateIssueRequest\x12\x19\n" +
+	"\basset_id\x18\x01 \x01(\x05R\aassetId\x12\"\n" +
+	"\rissue_type_id\x18\x02 \x01(\x05R\vissueTypeId\x12\x1b\n" +
+	"\tstatus_id\x18\x03 \x01(\x05R\bstatusId\x12&\n" +
+	"\x0fissue_source_id\x18\x04 \x01(\x05R\rissueSourceId\x12*\n" +
+	"\x11external_issue_id\x18\x05 \x01(\tR\x0fexternalIssueId\x12%\n" +
+	"\vdescription\x18\x06 \x01(\tH\x00R\vdescription\x88\x01\x01B\x0e\n" +
+	"\f_description\"!\n" +
+	"\x0fGetIssueRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\".\n" +
+	"\x11ListIssuesRequest\x12\x19\n" +
+	"\basset_id\x18\x01 \x01(\x05R\aassetId\"J\n" +
+	"\x12ListIssuesResponse\x124\n" +
+	"\x06issues\x18\x01 \x03(\v2\x1c.asset_service.IssueResponseR\x06issues\"\x8d\x02\n" +
+	"\x12UpdateIssueRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12'\n" +
+	"\rissue_type_id\x18\x02 \x01(\x05H\x00R\vissueTypeId\x88\x01\x01\x12 \n" +
+	"\tstatus_id\x18\x03 \x01(\x05H\x01R\bstatusId\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x04 \x01(\tH\x02R\vdescription\x88\x01\x01\x12/\n" +
+	"\x11external_issue_id\x18\x05 \x01(\tH\x03R\x0fexternalIssueId\x88\x01\x01B\x10\n" +
+	"\x0e_issue_type_idB\f\n" +
+	"\n" +
+	"_status_idB\x0e\n" +
+	"\f_descriptionB\x14\n" +
+	"\x12_external_issue_id\"$\n" +
+	"\x12DeleteIssueRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"\xf2\x01\n" +
+	"\fNoteResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x19\n" +
+	"\basset_id\x18\x02 \x01(\x05R\aassetId\x12)\n" +
+	"\x0easset_issue_id\x18\x03 \x01(\x05H\x00R\fassetIssueId\x88\x01\x01\x12$\n" +
+	"\x0eauthor_user_id\x18\x04 \x01(\x05R\fauthorUserId\x12\x18\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x129\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x11\n" +
+	"\x0f_asset_issue_id\"\xac\x01\n" +
+	"\x11CreateNoteRequest\x12\x19\n" +
+	"\basset_id\x18\x01 \x01(\x05R\aassetId\x12)\n" +
+	"\x0easset_issue_id\x18\x02 \x01(\x05H\x00R\fassetIssueId\x88\x01\x01\x12$\n" +
+	"\x0eauthor_user_id\x18\x03 \x01(\x05R\fauthorUserId\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontentB\x11\n" +
+	"\x0f_asset_issue_id\"-\n" +
+	"\x10ListNotesRequest\x12\x19\n" +
+	"\basset_id\x18\x01 \x01(\x05R\aassetId\"F\n" +
+	"\x11ListNotesResponse\x121\n" +
+	"\x05notes\x18\x01 \x03(\v2\x1b.asset_service.NoteResponseR\x05notes\"\x8c\x01\n" +
+	"\x11UpdateNoteRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12)\n" +
+	"\x0easset_issue_id\x18\x02 \x01(\x05H\x00R\fassetIssueId\x88\x01\x01\x12\x1d\n" +
+	"\acontent\x18\x03 \x01(\tH\x01R\acontent\x88\x01\x01B\x11\n" +
+	"\x0f_asset_issue_idB\n" +
+	"\n" +
+	"\b_content\"#\n" +
+	"\x11DeleteNoteRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"X\n" +
+	"\x12AssetClassResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1e\n" +
+	"\n" +
+	"definition\x18\x03 \x01(\tR\n" +
+	"definition\"M\n" +
+	"\x17CreateAssetClassRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1e\n" +
+	"\n" +
+	"definition\x18\x02 \x01(\tR\n" +
+	"definition\"W\n" +
+	"\x18ListAssetClassesResponse\x12;\n" +
+	"\aclasses\x18\x01 \x03(\v2!.asset_service.AssetClassResponseR\aclasses\"\x7f\n" +
+	"\x17UpdateAssetClassRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12#\n" +
+	"\n" +
+	"definition\x18\x03 \x01(\tH\x01R\n" +
+	"definition\x88\x01\x01B\a\n" +
+	"\x05_nameB\r\n" +
+	"\v_definition\"O\n" +
+	"\x13CriticalityResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\x05R\x05value\"D\n" +
+	"\x18CreateCriticalityRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value\"q\n" +
+	"\x18UpdateCriticalityRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x19\n" +
+	"\x05value\x18\x03 \x01(\x05H\x01R\x05value\x88\x01\x01B\a\n" +
+	"\x05_nameB\b\n" +
+	"\x06_value\"^\n" +
+	"\x12DeviceTypeResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12$\n" +
+	"\x0easset_class_id\x18\x03 \x01(\x05R\fassetClassId\"S\n" +
+	"\x17CreateDeviceTypeRequest\x12$\n" +
+	"\x0easset_class_id\x18\x01 \x01(\x05R\fassetClassId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"_\n" +
+	"\x17ListDeviceTypesResponse\x12D\n" +
+	"\fdevice_types\x18\x01 \x03(\v2!.asset_service.DeviceTypeResponseR\vdeviceTypes\"\xf9\x02\n" +
 	"\fDeviceDetail\x12\x1f\n" +
 	"\bhostname\x18\x01 \x01(\tH\x00R\bhostname\x88\x01\x01\x12)\n" +
 	"\x0edevice_type_id\x18\x02 \x01(\x05H\x01R\fdeviceTypeId\x88\x01\x01\x12\"\n" +
@@ -1149,82 +2398,35 @@ const file_proto_asset_service_proto_rawDesc = "" +
 	"\n" +
 	"\b_versionB\t\n" +
 	"\a_vendorB\x0f\n" +
-	"\r_software_cpe\"\xbb\x01\n" +
-	"\rAssetResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12$\n" +
-	"\x0easset_class_id\x18\x03 \x01(\x05R\fassetClassId\x12%\n" +
-	"\x0ecriticality_id\x18\x04 \x01(\x05R\rcriticalityId\x129\n" +
-	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xce\x02\n" +
-	"\x12UpdateIssueRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12'\n" +
-	"\rissue_type_id\x18\x02 \x01(\x05H\x00R\vissueTypeId\x88\x01\x01\x12 \n" +
-	"\tstatus_id\x18\x03 \x01(\x05H\x01R\bstatusId\x88\x01\x01\x12+\n" +
-	"\x0fissue_source_id\x18\x04 \x01(\x05H\x02R\rissueSourceId\x88\x01\x01\x12/\n" +
-	"\x11external_issue_id\x18\x05 \x01(\tH\x03R\x0fexternalIssueId\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x06 \x01(\tH\x04R\vdescription\x88\x01\x01B\x10\n" +
-	"\x0e_issue_type_idB\f\n" +
-	"\n" +
-	"_status_idB\x12\n" +
-	"\x10_issue_source_idB\x14\n" +
-	"\x12_external_issue_idB\x0e\n" +
-	"\f_description\"\xbe\x01\n" +
-	"\rIssueResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x19\n" +
-	"\basset_id\x18\x02 \x01(\x05R\aassetId\x12\x1b\n" +
-	"\tstatus_id\x18\x03 \x01(\x05R\bstatusId\x12*\n" +
-	"\x11external_issue_id\x18\x04 \x01(\tR\x0fexternalIssueId\x129\n" +
-	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x8c\x01\n" +
-	"\x11UpdateNoteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12)\n" +
-	"\x0easset_issue_id\x18\x02 \x01(\x05H\x00R\fassetIssueId\x88\x01\x01\x12\x1d\n" +
-	"\acontent\x18\x03 \x01(\tH\x01R\acontent\x88\x01\x01B\x11\n" +
-	"\x0f_asset_issue_idB\n" +
-	"\n" +
-	"\b_content\"8\n" +
-	"\fNoteResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"\x7f\n" +
-	"\x17UpdateAssetClassRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12#\n" +
-	"\n" +
-	"definition\x18\x03 \x01(\tH\x01R\n" +
-	"definition\x88\x01\x01B\a\n" +
-	"\x05_nameB\r\n" +
-	"\v_definition\"8\n" +
-	"\x12AssetClassResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"q\n" +
-	"\x18UpdateCriticalityRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x19\n" +
-	"\x05value\x18\x03 \x01(\x05H\x01R\x05value\x88\x01\x01B\a\n" +
-	"\x05_nameB\b\n" +
-	"\x06_value\"O\n" +
-	"\x13CriticalityResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\x05R\x05value\"\x89\x01\n" +
-	"\x17UpdateDeviceTypeRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12)\n" +
-	"\x0easset_class_id\x18\x02 \x01(\x05H\x00R\fassetClassId\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x01R\x04name\x88\x01\x01B\x11\n" +
-	"\x0f_asset_class_idB\a\n" +
-	"\x05_name\"8\n" +
-	"\x12DeviceTypeResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name2\x9b\x04\n" +
+	"\r_software_cpe2\xf5\x0e\n" +
 	"\fAssetService\x12N\n" +
-	"\vUpdateAsset\x12!.asset_service.UpdateAssetRequest\x1a\x1c.asset_service.AssetResponse\x12N\n" +
-	"\vUpdateIssue\x12!.asset_service.UpdateIssueRequest\x1a\x1c.asset_service.IssueResponse\x12K\n" +
+	"\vCreateAsset\x12!.asset_service.CreateAssetRequest\x1a\x1c.asset_service.AssetResponse\x12H\n" +
+	"\bGetAsset\x12\x1e.asset_service.GetAssetRequest\x1a\x1c.asset_service.AssetResponse\x12Q\n" +
 	"\n" +
-	"UpdateNote\x12 .asset_service.UpdateNoteRequest\x1a\x1b.asset_service.NoteResponse\x12]\n" +
-	"\x10UpdateAssetClass\x12&.asset_service.UpdateAssetClassRequest\x1a!.asset_service.AssetClassResponse\x12`\n" +
-	"\x11UpdateCriticality\x12'.asset_service.UpdateCriticalityRequest\x1a\".asset_service.CriticalityResponse\x12]\n" +
-	"\x10UpdateDeviceType\x12&.asset_service.UpdateDeviceTypeRequest\x1a!.asset_service.DeviceTypeResponseB\tZ\a./protob\x06proto3"
+	"ListAssets\x12 .asset_service.ListAssetsRequest\x1a!.asset_service.ListAssetsResponse\x12N\n" +
+	"\vUpdateAsset\x12!.asset_service.UpdateAssetRequest\x1a\x1c.asset_service.AssetResponse\x12F\n" +
+	"\vDeleteAsset\x12!.asset_service.DeleteAssetRequest\x1a\x14.asset_service.Empty\x12N\n" +
+	"\vCreateIssue\x12!.asset_service.CreateIssueRequest\x1a\x1c.asset_service.IssueResponse\x12H\n" +
+	"\bGetIssue\x12\x1e.asset_service.GetIssueRequest\x1a\x1c.asset_service.IssueResponse\x12X\n" +
+	"\x11ListIssuesByAsset\x12 .asset_service.ListIssuesRequest\x1a!.asset_service.ListIssuesResponse\x12N\n" +
+	"\vUpdateIssue\x12!.asset_service.UpdateIssueRequest\x1a\x1c.asset_service.IssueResponse\x12F\n" +
+	"\vDeleteIssue\x12!.asset_service.DeleteIssueRequest\x1a\x14.asset_service.Empty\x12K\n" +
+	"\n" +
+	"CreateNote\x12 .asset_service.CreateNoteRequest\x1a\x1b.asset_service.NoteResponse\x12N\n" +
+	"\tListNotes\x12\x1f.asset_service.ListNotesRequest\x1a .asset_service.ListNotesResponse\x12K\n" +
+	"\n" +
+	"UpdateNote\x12 .asset_service.UpdateNoteRequest\x1a\x1b.asset_service.NoteResponse\x12D\n" +
+	"\n" +
+	"DeleteNote\x12 .asset_service.DeleteNoteRequest\x1a\x14.asset_service.Empty\x12]\n" +
+	"\x10CreateAssetClass\x12&.asset_service.CreateAssetClassRequest\x1a!.asset_service.AssetClassResponse\x12Q\n" +
+	"\x10ListAssetClasses\x12\x14.asset_service.Empty\x1a'.asset_service.ListAssetClassesResponse\x12]\n" +
+	"\x10UpdateAssetClass\x12&.asset_service.UpdateAssetClassRequest\x1a!.asset_service.AssetClassResponse\x12N\n" +
+	"\x10DeleteAssetClass\x12$.asset_service.DeleteMetadataRequest\x1a\x14.asset_service.Empty\x12`\n" +
+	"\x11CreateCriticality\x12'.asset_service.CreateCriticalityRequest\x1a\".asset_service.CriticalityResponse\x12`\n" +
+	"\x11UpdateCriticality\x12'.asset_service.UpdateCriticalityRequest\x1a\".asset_service.CriticalityResponse\x12O\n" +
+	"\x11DeleteCriticality\x12$.asset_service.DeleteMetadataRequest\x1a\x14.asset_service.Empty\x12]\n" +
+	"\x10CreateDeviceType\x12&.asset_service.CreateDeviceTypeRequest\x1a!.asset_service.DeviceTypeResponse\x12O\n" +
+	"\x0fListDeviceTypes\x12\x14.asset_service.Empty\x1a&.asset_service.ListDeviceTypesResponseB\x15Z\x13asset-service/protob\x06proto3"
 
 var (
 	file_proto_asset_service_proto_rawDescOnce sync.Once
@@ -1238,48 +2440,111 @@ func file_proto_asset_service_proto_rawDescGZIP() []byte {
 	return file_proto_asset_service_proto_rawDescData
 }
 
-var file_proto_asset_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_proto_asset_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_proto_asset_service_proto_goTypes = []any{
-	(*UpdateAssetRequest)(nil),       // 0: asset_service.UpdateAssetRequest
-	(*DeviceDetail)(nil),             // 1: asset_service.DeviceDetail
-	(*NetworkDetail)(nil),            // 2: asset_service.NetworkDetail
-	(*SoftwareDetail)(nil),           // 3: asset_service.SoftwareDetail
-	(*AssetResponse)(nil),            // 4: asset_service.AssetResponse
-	(*UpdateIssueRequest)(nil),       // 5: asset_service.UpdateIssueRequest
-	(*IssueResponse)(nil),            // 6: asset_service.IssueResponse
-	(*UpdateNoteRequest)(nil),        // 7: asset_service.UpdateNoteRequest
-	(*NoteResponse)(nil),             // 8: asset_service.NoteResponse
-	(*UpdateAssetClassRequest)(nil),  // 9: asset_service.UpdateAssetClassRequest
-	(*AssetClassResponse)(nil),       // 10: asset_service.AssetClassResponse
-	(*UpdateCriticalityRequest)(nil), // 11: asset_service.UpdateCriticalityRequest
-	(*CriticalityResponse)(nil),      // 12: asset_service.CriticalityResponse
-	(*UpdateDeviceTypeRequest)(nil),  // 13: asset_service.UpdateDeviceTypeRequest
-	(*DeviceTypeResponse)(nil),       // 14: asset_service.DeviceTypeResponse
-	(*timestamppb.Timestamp)(nil),    // 15: google.protobuf.Timestamp
+	(*Empty)(nil),                    // 0: asset_service.Empty
+	(*DeleteMetadataRequest)(nil),    // 1: asset_service.DeleteMetadataRequest
+	(*AssetResponse)(nil),            // 2: asset_service.AssetResponse
+	(*CreateAssetRequest)(nil),       // 3: asset_service.CreateAssetRequest
+	(*GetAssetRequest)(nil),          // 4: asset_service.GetAssetRequest
+	(*ListAssetsRequest)(nil),        // 5: asset_service.ListAssetsRequest
+	(*ListAssetsResponse)(nil),       // 6: asset_service.ListAssetsResponse
+	(*UpdateAssetRequest)(nil),       // 7: asset_service.UpdateAssetRequest
+	(*DeleteAssetRequest)(nil),       // 8: asset_service.DeleteAssetRequest
+	(*IssueResponse)(nil),            // 9: asset_service.IssueResponse
+	(*CreateIssueRequest)(nil),       // 10: asset_service.CreateIssueRequest
+	(*GetIssueRequest)(nil),          // 11: asset_service.GetIssueRequest
+	(*ListIssuesRequest)(nil),        // 12: asset_service.ListIssuesRequest
+	(*ListIssuesResponse)(nil),       // 13: asset_service.ListIssuesResponse
+	(*UpdateIssueRequest)(nil),       // 14: asset_service.UpdateIssueRequest
+	(*DeleteIssueRequest)(nil),       // 15: asset_service.DeleteIssueRequest
+	(*NoteResponse)(nil),             // 16: asset_service.NoteResponse
+	(*CreateNoteRequest)(nil),        // 17: asset_service.CreateNoteRequest
+	(*ListNotesRequest)(nil),         // 18: asset_service.ListNotesRequest
+	(*ListNotesResponse)(nil),        // 19: asset_service.ListNotesResponse
+	(*UpdateNoteRequest)(nil),        // 20: asset_service.UpdateNoteRequest
+	(*DeleteNoteRequest)(nil),        // 21: asset_service.DeleteNoteRequest
+	(*AssetClassResponse)(nil),       // 22: asset_service.AssetClassResponse
+	(*CreateAssetClassRequest)(nil),  // 23: asset_service.CreateAssetClassRequest
+	(*ListAssetClassesResponse)(nil), // 24: asset_service.ListAssetClassesResponse
+	(*UpdateAssetClassRequest)(nil),  // 25: asset_service.UpdateAssetClassRequest
+	(*CriticalityResponse)(nil),      // 26: asset_service.CriticalityResponse
+	(*CreateCriticalityRequest)(nil), // 27: asset_service.CreateCriticalityRequest
+	(*UpdateCriticalityRequest)(nil), // 28: asset_service.UpdateCriticalityRequest
+	(*DeviceTypeResponse)(nil),       // 29: asset_service.DeviceTypeResponse
+	(*CreateDeviceTypeRequest)(nil),  // 30: asset_service.CreateDeviceTypeRequest
+	(*ListDeviceTypesResponse)(nil),  // 31: asset_service.ListDeviceTypesResponse
+	(*DeviceDetail)(nil),             // 32: asset_service.DeviceDetail
+	(*NetworkDetail)(nil),            // 33: asset_service.NetworkDetail
+	(*SoftwareDetail)(nil),           // 34: asset_service.SoftwareDetail
+	(*timestamppb.Timestamp)(nil),    // 35: google.protobuf.Timestamp
 }
 var file_proto_asset_service_proto_depIdxs = []int32{
-	1,  // 0: asset_service.UpdateAssetRequest.device_info:type_name -> asset_service.DeviceDetail
-	2,  // 1: asset_service.UpdateAssetRequest.network_info:type_name -> asset_service.NetworkDetail
-	3,  // 2: asset_service.UpdateAssetRequest.software_info:type_name -> asset_service.SoftwareDetail
-	15, // 3: asset_service.AssetResponse.created_at:type_name -> google.protobuf.Timestamp
-	15, // 4: asset_service.IssueResponse.updated_at:type_name -> google.protobuf.Timestamp
-	0,  // 5: asset_service.AssetService.UpdateAsset:input_type -> asset_service.UpdateAssetRequest
-	5,  // 6: asset_service.AssetService.UpdateIssue:input_type -> asset_service.UpdateIssueRequest
-	7,  // 7: asset_service.AssetService.UpdateNote:input_type -> asset_service.UpdateNoteRequest
-	9,  // 8: asset_service.AssetService.UpdateAssetClass:input_type -> asset_service.UpdateAssetClassRequest
-	11, // 9: asset_service.AssetService.UpdateCriticality:input_type -> asset_service.UpdateCriticalityRequest
-	13, // 10: asset_service.AssetService.UpdateDeviceType:input_type -> asset_service.UpdateDeviceTypeRequest
-	4,  // 11: asset_service.AssetService.UpdateAsset:output_type -> asset_service.AssetResponse
-	6,  // 12: asset_service.AssetService.UpdateIssue:output_type -> asset_service.IssueResponse
-	8,  // 13: asset_service.AssetService.UpdateNote:output_type -> asset_service.NoteResponse
-	10, // 14: asset_service.AssetService.UpdateAssetClass:output_type -> asset_service.AssetClassResponse
-	12, // 15: asset_service.AssetService.UpdateCriticality:output_type -> asset_service.CriticalityResponse
-	14, // 16: asset_service.AssetService.UpdateDeviceType:output_type -> asset_service.DeviceTypeResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	35, // 0: asset_service.AssetResponse.created_at:type_name -> google.protobuf.Timestamp
+	32, // 1: asset_service.AssetResponse.device_info:type_name -> asset_service.DeviceDetail
+	33, // 2: asset_service.AssetResponse.network_info:type_name -> asset_service.NetworkDetail
+	34, // 3: asset_service.AssetResponse.software_info:type_name -> asset_service.SoftwareDetail
+	32, // 4: asset_service.CreateAssetRequest.device_info:type_name -> asset_service.DeviceDetail
+	33, // 5: asset_service.CreateAssetRequest.network_info:type_name -> asset_service.NetworkDetail
+	34, // 6: asset_service.CreateAssetRequest.software_info:type_name -> asset_service.SoftwareDetail
+	2,  // 7: asset_service.ListAssetsResponse.assets:type_name -> asset_service.AssetResponse
+	35, // 8: asset_service.IssueResponse.updated_at:type_name -> google.protobuf.Timestamp
+	9,  // 9: asset_service.ListIssuesResponse.issues:type_name -> asset_service.IssueResponse
+	35, // 10: asset_service.NoteResponse.created_at:type_name -> google.protobuf.Timestamp
+	16, // 11: asset_service.ListNotesResponse.notes:type_name -> asset_service.NoteResponse
+	22, // 12: asset_service.ListAssetClassesResponse.classes:type_name -> asset_service.AssetClassResponse
+	29, // 13: asset_service.ListDeviceTypesResponse.device_types:type_name -> asset_service.DeviceTypeResponse
+	3,  // 14: asset_service.AssetService.CreateAsset:input_type -> asset_service.CreateAssetRequest
+	4,  // 15: asset_service.AssetService.GetAsset:input_type -> asset_service.GetAssetRequest
+	5,  // 16: asset_service.AssetService.ListAssets:input_type -> asset_service.ListAssetsRequest
+	7,  // 17: asset_service.AssetService.UpdateAsset:input_type -> asset_service.UpdateAssetRequest
+	8,  // 18: asset_service.AssetService.DeleteAsset:input_type -> asset_service.DeleteAssetRequest
+	10, // 19: asset_service.AssetService.CreateIssue:input_type -> asset_service.CreateIssueRequest
+	11, // 20: asset_service.AssetService.GetIssue:input_type -> asset_service.GetIssueRequest
+	12, // 21: asset_service.AssetService.ListIssuesByAsset:input_type -> asset_service.ListIssuesRequest
+	14, // 22: asset_service.AssetService.UpdateIssue:input_type -> asset_service.UpdateIssueRequest
+	15, // 23: asset_service.AssetService.DeleteIssue:input_type -> asset_service.DeleteIssueRequest
+	17, // 24: asset_service.AssetService.CreateNote:input_type -> asset_service.CreateNoteRequest
+	18, // 25: asset_service.AssetService.ListNotes:input_type -> asset_service.ListNotesRequest
+	20, // 26: asset_service.AssetService.UpdateNote:input_type -> asset_service.UpdateNoteRequest
+	21, // 27: asset_service.AssetService.DeleteNote:input_type -> asset_service.DeleteNoteRequest
+	23, // 28: asset_service.AssetService.CreateAssetClass:input_type -> asset_service.CreateAssetClassRequest
+	0,  // 29: asset_service.AssetService.ListAssetClasses:input_type -> asset_service.Empty
+	25, // 30: asset_service.AssetService.UpdateAssetClass:input_type -> asset_service.UpdateAssetClassRequest
+	1,  // 31: asset_service.AssetService.DeleteAssetClass:input_type -> asset_service.DeleteMetadataRequest
+	27, // 32: asset_service.AssetService.CreateCriticality:input_type -> asset_service.CreateCriticalityRequest
+	28, // 33: asset_service.AssetService.UpdateCriticality:input_type -> asset_service.UpdateCriticalityRequest
+	1,  // 34: asset_service.AssetService.DeleteCriticality:input_type -> asset_service.DeleteMetadataRequest
+	30, // 35: asset_service.AssetService.CreateDeviceType:input_type -> asset_service.CreateDeviceTypeRequest
+	0,  // 36: asset_service.AssetService.ListDeviceTypes:input_type -> asset_service.Empty
+	2,  // 37: asset_service.AssetService.CreateAsset:output_type -> asset_service.AssetResponse
+	2,  // 38: asset_service.AssetService.GetAsset:output_type -> asset_service.AssetResponse
+	6,  // 39: asset_service.AssetService.ListAssets:output_type -> asset_service.ListAssetsResponse
+	2,  // 40: asset_service.AssetService.UpdateAsset:output_type -> asset_service.AssetResponse
+	0,  // 41: asset_service.AssetService.DeleteAsset:output_type -> asset_service.Empty
+	9,  // 42: asset_service.AssetService.CreateIssue:output_type -> asset_service.IssueResponse
+	9,  // 43: asset_service.AssetService.GetIssue:output_type -> asset_service.IssueResponse
+	13, // 44: asset_service.AssetService.ListIssuesByAsset:output_type -> asset_service.ListIssuesResponse
+	9,  // 45: asset_service.AssetService.UpdateIssue:output_type -> asset_service.IssueResponse
+	0,  // 46: asset_service.AssetService.DeleteIssue:output_type -> asset_service.Empty
+	16, // 47: asset_service.AssetService.CreateNote:output_type -> asset_service.NoteResponse
+	19, // 48: asset_service.AssetService.ListNotes:output_type -> asset_service.ListNotesResponse
+	16, // 49: asset_service.AssetService.UpdateNote:output_type -> asset_service.NoteResponse
+	0,  // 50: asset_service.AssetService.DeleteNote:output_type -> asset_service.Empty
+	22, // 51: asset_service.AssetService.CreateAssetClass:output_type -> asset_service.AssetClassResponse
+	24, // 52: asset_service.AssetService.ListAssetClasses:output_type -> asset_service.ListAssetClassesResponse
+	22, // 53: asset_service.AssetService.UpdateAssetClass:output_type -> asset_service.AssetClassResponse
+	0,  // 54: asset_service.AssetService.DeleteAssetClass:output_type -> asset_service.Empty
+	26, // 55: asset_service.AssetService.CreateCriticality:output_type -> asset_service.CriticalityResponse
+	26, // 56: asset_service.AssetService.UpdateCriticality:output_type -> asset_service.CriticalityResponse
+	0,  // 57: asset_service.AssetService.DeleteCriticality:output_type -> asset_service.Empty
+	29, // 58: asset_service.AssetService.CreateDeviceType:output_type -> asset_service.DeviceTypeResponse
+	31, // 59: asset_service.AssetService.ListDeviceTypes:output_type -> asset_service.ListDeviceTypesResponse
+	37, // [37:60] is the sub-list for method output_type
+	14, // [14:37] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_proto_asset_service_proto_init() }
@@ -1287,22 +2552,27 @@ func file_proto_asset_service_proto_init() {
 	if File_proto_asset_service_proto != nil {
 		return
 	}
-	file_proto_asset_service_proto_msgTypes[0].OneofWrappers = []any{}
-	file_proto_asset_service_proto_msgTypes[1].OneofWrappers = []any{}
 	file_proto_asset_service_proto_msgTypes[2].OneofWrappers = []any{}
 	file_proto_asset_service_proto_msgTypes[3].OneofWrappers = []any{}
-	file_proto_asset_service_proto_msgTypes[5].OneofWrappers = []any{}
 	file_proto_asset_service_proto_msgTypes[7].OneofWrappers = []any{}
 	file_proto_asset_service_proto_msgTypes[9].OneofWrappers = []any{}
-	file_proto_asset_service_proto_msgTypes[11].OneofWrappers = []any{}
-	file_proto_asset_service_proto_msgTypes[13].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[10].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[14].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[16].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[17].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[20].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[25].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[28].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[32].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[33].OneofWrappers = []any{}
+	file_proto_asset_service_proto_msgTypes[34].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_asset_service_proto_rawDesc), len(file_proto_asset_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

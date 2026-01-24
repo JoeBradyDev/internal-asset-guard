@@ -61,6 +61,24 @@ func (q *Queries) DeleteAssetNote(ctx context.Context, id int32) error {
 	return err
 }
 
+const getNoteByID = `-- name: GetNoteByID :one
+SELECT id, asset_id, asset_issue_id, author_user_id, content, created_at FROM asset_note WHERE id = $1
+`
+
+func (q *Queries) GetNoteByID(ctx context.Context, id int32) (AssetNote, error) {
+	row := q.db.QueryRow(ctx, getNoteByID, id)
+	var i AssetNote
+	err := row.Scan(
+		&i.ID,
+		&i.AssetID,
+		&i.AssetIssueID,
+		&i.AuthorUserID,
+		&i.Content,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getNotesByAssetID = `-- name: GetNotesByAssetID :many
 SELECT id, asset_id, asset_issue_id, author_user_id, content, created_at FROM asset_note
 WHERE asset_id = $1

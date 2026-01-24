@@ -2,10 +2,8 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	"asset-service/internal/db"
-	"asset-service/internal/dtos"
 	"asset-service/proto"
 
 	"github.com/jackc/pgx/v5/pgtype"
@@ -14,14 +12,9 @@ import (
 // --- ASSET CLASS ---
 
 func (s *AssetServer) CreateAssetClass(ctx context.Context, req *proto.CreateAssetClassRequest) (*proto.AssetClassResponse, error) {
-	dto := dtos.CreateAssetClass{
-		Name:       req.Name,
-		Definition: req.Definition,
-	}
-
 	res, err := s.Queries.CreateAssetClass(ctx, db.CreateAssetClassParams{
-		Name: dto.Name,
-		Definition: pgtype.Text{String: dto.Definition, Valid: dto.Definition != ""},
+		Name: req.Name,
+		Definition: pgtype.Text{String: req.Definition, Valid: req.Definition != ""},
 	})
 	if err != nil {
 		return nil, err
@@ -36,18 +29,16 @@ func (s *AssetServer) UpdateAssetClass(ctx context.Context, req *proto.UpdateAss
 		return nil, err
 	}
 
-	dto := dtos.UpdateAssetClass{
-		Name:       &current.Name,
-		Definition: &current.Definition.String,
-	}
+	name := current.Name
+	defn := current.Definition.String
 
-	if req.Name != nil { dto.Name = req.Name }
-	if req.Definition != nil { dto.Definition = req.Definition }
+	if req.Name != nil { name = *req.Name }
+	if req.Definition != nil { defn = *req.Definition }
 
 	updated, err := s.Queries.UpdateAssetClass(ctx, db.UpdateAssetClassParams{
-		ID:   current.ID,
-		Name: *dto.Name,
-		Definition: pgtype.Text{String: *dto.Definition, Valid: dto.Definition != nil},
+		ID:         current.ID,
+		Name:       name,
+		Definition: pgtype.Text{String: defn, Valid: true},
 	})
 	if err != nil {
 		return nil, err
@@ -72,14 +63,9 @@ func (s *AssetServer) ListAssetClasses(ctx context.Context, req *proto.Empty) (*
 // --- CRITICALITY ---
 
 func (s *AssetServer) CreateCriticality(ctx context.Context, req *proto.CreateCriticalityRequest) (*proto.CriticalityResponse, error) {
-	dto := dtos.CreateCriticality{
-		Name:  req.Name,
-		Value: int(req.Value),
-	}
-
 	res, err := s.Queries.CreateAssetCriticality(ctx, db.CreateAssetCriticalityParams{
-		Name:  dto.Name,
-		Value: int32(dto.Value),
+		Name:  req.Name,
+		Value: int32(req.Value),
 	})
 	if err != nil {
 		return nil, err
@@ -94,22 +80,16 @@ func (s *AssetServer) UpdateCriticality(ctx context.Context, req *proto.UpdateCr
 		return nil, err
 	}
 
-	val := int(current.Value)
-	dto := dtos.UpdateCriticality{
-		Name:  &current.Name,
-		Value: &val,
-	}
+	name := current.Name
+	val := current.Value
 
-	if req.Name != nil { dto.Name = req.Name }
-	if req.Value != nil {
-		v := int(*req.Value)
-		dto.Value = &v
-	}
+	if req.Name != nil { name = *req.Name }
+	if req.Value != nil { val = int32(*req.Value) }
 
 	updated, err := s.Queries.UpdateAssetCriticality(ctx, db.UpdateAssetCriticalityParams{
 		ID:    current.ID,
-		Name:  *dto.Name,
-		Value: int32(*dto.Value),
+		Name:  name,
+		Value: val,
 	})
 	if err != nil {
 		return nil, err
@@ -121,14 +101,9 @@ func (s *AssetServer) UpdateCriticality(ctx context.Context, req *proto.UpdateCr
 // --- DEVICE TYPE ---
 
 func (s *AssetServer) CreateDeviceType(ctx context.Context, req *proto.CreateDeviceTypeRequest) (*proto.DeviceTypeResponse, error) {
-	dto := dtos.CreateDeviceType{
-		AssetClassID: int(req.AssetClassId),
-		Name:         req.Name,
-	}
-
 	res, err := s.Queries.CreateDeviceType(ctx, db.CreateDeviceTypeParams{
-		AssetClassID: int32(dto.AssetClassID),
-		Name:         dto.Name,
+		AssetClassID: req.AssetClassId,
+		Name:         req.Name,
 	})
 	if err != nil {
 		return nil, err

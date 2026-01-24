@@ -15,5 +15,5 @@ COPY --from=builder /asset-service /asset-service
 
 # Use a numeric ID for the user to stay shell-agnostic
 USER 1000:1000
-EXPOSE 8080
+EXPOSE 50051
 ENTRYPOINT ["/asset-service"]

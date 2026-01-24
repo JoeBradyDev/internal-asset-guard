@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"asset-service/internal/db"
-	"asset-service/internal/dtos"
+	"asset-service/internal/dto"
 	"asset-service/proto"
 
 	"github.com/jackc/pgx/v5/pgtype"
@@ -15,7 +15,7 @@ import (
 // CreateIssue creates a new issue tied to an asset.
 func (s *AssetServer) CreateIssue(ctx context.Context, req *proto.CreateIssueRequest) (*proto.IssueResponse, error) {
 	// 1. Map to CreateAssetIssue DTO
-	dto := dtos.CreateAssetIssue{
+	dto := dto.CreateAssetIssue{
 		AssetID:         int(req.AssetId),
 		IssueTypeID:     int(req.IssueTypeId),
 		StatusID:        int(req.StatusId),
@@ -86,7 +86,7 @@ func (s *AssetServer) ListIssuesByAsset(ctx context.Context, req *proto.ListIssu
 	return &proto.ListIssuesResponse{Issues: issues}, nil
 }
 
-// UpdateIssue uses the fetch-merge-save pattern with dtos.UpdateAssetIssue.
+// UpdateIssue uses the fetch-merge-save pattern with dto.UpdateAssetIssue.
 func (s *AssetServer) UpdateIssue(ctx context.Context, req *proto.UpdateIssueRequest) (*proto.IssueResponse, error) {
 	// 1. FETCH current state
 	current, err := s.Queries.GetIssueByID(ctx, req.Id)
@@ -99,7 +99,7 @@ func (s *AssetServer) UpdateIssue(ctx context.Context, req *proto.UpdateIssueReq
 	statusID := int(current.StatusID)
 	sourceID := int(current.IssueSourceID)
 
-	dto := dtos.UpdateAssetIssue{
+	dto := dto.UpdateAssetIssue{
 		IssueTypeID:     &typeID,
 		StatusID:        &statusID,
 		IssueSourceID:   &sourceID,

@@ -2,40 +2,153 @@ syntax = "proto3";
 
 package asset_service;
 
-// This must match your folder structure for the generated Go files
-option go_package = "./proto";
+option go_package = "asset-service/proto";
 
-// This import requires the file to exist at:
-// [any-include-path]/google/protobuf/timestamp.proto
 import "google/protobuf/timestamp.proto";
 
-// The gRPC Service Definition
 service AssetService {
-  // Asset Operations
+  rpc CreateAsset(CreateAssetRequest) returns (AssetResponse);
+  rpc GetAsset(GetAssetRequest) returns (AssetResponse);
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse);
   rpc UpdateAsset(UpdateAssetRequest) returns (AssetResponse);
+  rpc DeleteAsset(DeleteAssetRequest) returns (Empty);
 
-  // Issue Operations
+  rpc CreateIssue(CreateIssueRequest) returns (IssueResponse);
+  rpc GetIssue(GetIssueRequest) returns (IssueResponse);
+  rpc ListIssuesByAsset(ListIssuesRequest) returns (ListIssuesResponse);
   rpc UpdateIssue(UpdateIssueRequest) returns (IssueResponse);
+  rpc DeleteIssue(DeleteIssueRequest) returns (Empty);
 
-  // Note Operations
+  rpc CreateNote(CreateNoteRequest) returns (NoteResponse);
+  rpc ListNotes(ListNotesRequest) returns (ListNotesResponse);
   rpc UpdateNote(UpdateNoteRequest) returns (NoteResponse);
+  rpc DeleteNote(DeleteNoteRequest) returns (Empty);
 
-  // Metadata Operations
+  rpc CreateAssetClass(CreateAssetClassRequest) returns (AssetClassResponse);
+  rpc ListAssetClasses(Empty) returns (ListAssetClassesResponse);
   rpc UpdateAssetClass(UpdateAssetClassRequest) returns (AssetClassResponse);
+  rpc DeleteAssetClass(DeleteMetadataRequest) returns (Empty);
+
+  rpc CreateCriticality(CreateCriticalityRequest) returns (CriticalityResponse);
   rpc UpdateCriticality(UpdateCriticalityRequest) returns (CriticalityResponse);
-  rpc UpdateDeviceType(UpdateDeviceTypeRequest) returns (DeviceTypeResponse);
+  rpc DeleteCriticality(DeleteMetadataRequest) returns (Empty);
+
+  rpc CreateDeviceType(CreateDeviceTypeRequest) returns (DeviceTypeResponse);
+  rpc ListDeviceTypes(Empty) returns (ListDeviceTypesResponse);
 }
 
-// --- ASSET MESSAGES ---
+message Empty {}
+
+message DeleteMetadataRequest {
+  int32 id = 1;
+}
+
+message AssetResponse {
+  int32 id = 1;
+  string name = 2;
+  string asset_class = 3;
+  int32 asset_class_id = 4;
+  int32 criticality_id = 5;
+  string criticality = 6;
+  google.protobuf.Timestamp created_at = 7;
+  optional DeviceDetail device_info = 8;
+  optional NetworkDetail network_info = 9;
+  optional SoftwareDetail software_info = 10;
+}
+
+message CreateAssetRequest {
+  string name = 1;
+  int32 asset_class_id = 2;
+  int32 criticality_id = 3;
+  optional DeviceDetail device_info = 4;
+  optional NetworkDetail network_info = 5;
+  optional SoftwareDetail software_info = 6;
+}
+
+message GetAssetRequest { int32 id = 1; }
+message ListAssetsRequest { int32 limit = 1; int32 offset = 2; }
+message ListAssetsResponse { repeated AssetResponse assets = 1; }
 message UpdateAssetRequest {
   int32 id = 1;
   optional string name = 2;
   optional int32 asset_class_id = 3;
   optional int32 criticality_id = 4;
-  optional DeviceDetail device_info = 5;
-  optional NetworkDetail network_info = 6;
-  optional SoftwareDetail software_info = 7;
 }
+message DeleteAssetRequest { int32 id = 1; }
+
+message IssueResponse {
+  int32 id = 1;
+  int32 asset_id = 2;
+  int32 issue_type_id = 3;
+  string issue_type = 4;
+  string category = 5;
+  int32 status_id = 6;
+  string status = 7;
+  int32 issue_source_id = 8;
+  string issue_source = 9;
+  string external_issue_id = 10;
+  optional string description = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+message CreateIssueRequest {
+  int32 asset_id = 1;
+  int32 issue_type_id = 2;
+  int32 status_id = 3;
+  int32 issue_source_id = 4;
+  string external_issue_id = 5;
+  optional string description = 6;
+}
+
+message GetIssueRequest { int32 id = 1; }
+message ListIssuesRequest { int32 asset_id = 1; }
+message ListIssuesResponse { repeated IssueResponse issues = 1; }
+message UpdateIssueRequest {
+  int32 id = 1;
+  optional int32 issue_type_id = 2;
+  optional int32 status_id = 3;
+  optional string description = 4;
+  optional string external_issue_id = 5;
+}
+message DeleteIssueRequest { int32 id = 1; }
+
+message NoteResponse {
+  int32 id = 1;
+  int32 asset_id = 2;
+  optional int32 asset_issue_id = 3;
+  int32 author_user_id = 4;
+  string content = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message CreateNoteRequest {
+  int32 asset_id = 1;
+  optional int32 asset_issue_id = 2;
+  int32 author_user_id = 3;
+  string content = 4;
+}
+
+message ListNotesRequest { int32 asset_id = 1; }
+message ListNotesResponse { repeated NoteResponse notes = 1; }
+message UpdateNoteRequest {
+  int32 id = 1;
+  optional int32 asset_issue_id = 2;
+  optional string content = 3;
+}
+message DeleteNoteRequest { int32 id = 1; }
+
+message AssetClassResponse { int32 id = 1; string name = 2; string definition = 3; }
+message CreateAssetClassRequest { string name = 1; string definition = 2; }
+message ListAssetClassesResponse { repeated AssetClassResponse classes = 1; }
+message UpdateAssetClassRequest { int32 id = 1; optional string name = 2; optional string definition = 3; }
+
+message CriticalityResponse { int32 id = 1; string name = 2; int32 value = 3; }
+message CreateCriticalityRequest { string name = 1; int32 value = 2; }
+message UpdateCriticalityRequest { int32 id = 1; optional string name = 2; optional int32 value = 3; }
+
+message DeviceTypeResponse { int32 id = 1; string name = 2; int32 asset_class_id = 3; }
+message CreateDeviceTypeRequest { int32 asset_class_id = 1; string name = 2; }
+message ListDeviceTypesResponse { repeated DeviceTypeResponse device_types = 1; }
 
 message DeviceDetail {
   optional string hostname = 1;
@@ -64,77 +177,4 @@ message SoftwareDetail {
   optional string version = 4;
   optional string vendor = 5;
   optional string software_cpe = 6;
-}
-
-message AssetResponse {
-  int32 id = 1;
-  string name = 2;
-  int32 asset_class_id = 3;
-  int32 criticality_id = 4;
-  google.protobuf.Timestamp created_at = 5;
-}
-
-// --- ISSUE MESSAGES ---
-message UpdateIssueRequest {
-  int32 id = 1;
-  optional int32 issue_type_id = 2;
-  optional int32 status_id = 3;
-  optional int32 issue_source_id = 4;
-  optional string external_issue_id = 5;
-  optional string description = 6;
-}
-
-message IssueResponse {
-  int32 id = 1;
-  int32 asset_id = 2;
-  int32 status_id = 3;
-  string external_issue_id = 4;
-  google.protobuf.Timestamp updated_at = 5;
-}
-
-// --- NOTE MESSAGES ---
-message UpdateNoteRequest {
-  int32 id = 1;
-  optional int32 asset_issue_id = 2;
-  optional string content = 3;
-}
-
-message NoteResponse {
-  int32 id = 1;
-  string content = 2;
-}
-
-// --- METADATA MESSAGES ---
-message UpdateAssetClassRequest {
-  int32 id = 1;
-  optional string name = 2;
-  optional string definition = 3;
-}
-
-message AssetClassResponse {
-  int32 id = 1;
-  string name = 2;
-}
-
-message UpdateCriticalityRequest {
-  int32 id = 1;
-  optional string name = 2;
-  optional int32 value = 3;
-}
-
-message CriticalityResponse {
-  int32 id = 1;
-  string name = 2;
-  int32 value = 3;
-}
-
-message UpdateDeviceTypeRequest {
-  int32 id = 1;
-  optional int32 asset_class_id = 2;
-  optional string name = 3;
-}
-
-message DeviceTypeResponse {
-  int32 id = 1;
-  string name = 2;
 }

@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: asset-service
 spec:
-  ports: [{ port: 8080 }]
+  ports: [{ port: 50051 }] # FIXED: Standard gRPC port
   selector: { app: asset-service }
 ---
 apiVersion: apps/v1
@@ -21,6 +21,8 @@ spec:
           image: asset-guard-asset-service
           imagePullPolicy: Never
           env:
+            - name: GRPC_PORT
+              value: '50051'
             - name: DATABASE_URL
               value: 'postgresql://postgres:password@postgres:5432/assetguard'
             - name: PGHOST
@@ -59,7 +61,7 @@ spec:
           image: asset-guard-gateway
           env:
             - name: ASSET_SERVICE_URL
-              value: 'http://asset-service:8080'
+              value: 'asset-service:50051' # FIXED: Pointing to new port, no http://
 ---
 # 3. Frontend (Next.js)
 apiVersion: v1

@@ -12,6 +12,9 @@ INSERT INTO asset_note (
 )
 RETURNING *;
 
+-- name: GetNoteByID :one
+SELECT * FROM asset_note WHERE id = $1;
+
 -- name: GetNotesByAssetID :many
 SELECT * FROM asset_note
 WHERE asset_id = $1
