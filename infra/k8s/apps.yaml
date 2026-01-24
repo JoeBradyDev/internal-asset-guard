@@ -33,6 +33,8 @@ spec:
               value: 'postgres'
             - name: PGPASSWORD
               value: 'password'
+            - name: SEED_ASSET_COUNT
+              value: '1000'
 ---
 # 2. Gateway (NestJS)
 apiVersion: v1

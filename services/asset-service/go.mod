@@ -3,6 +3,7 @@ module asset-service
 go 1.25.5
 
 require (
+	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/jackc/pgx/v5 v5.8.0
 	github.com/jackc/tern/v2 v2.3.4
 )

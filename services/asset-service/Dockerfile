@@ -5,7 +5,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o /asset-service ./main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o /asset-service .
 
 # Stage 2: Final
 # Match the Alpine version exactly (3.21)

@@ -2,31 +2,22 @@ package main
 
 import (
 	"context"
-	"embed"
 	"fmt"
-	"io/fs"
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/tern/v2/migrate"
 )
-
-// 1. Embed migrations
-//go:embed db/migrations/*.sql
-var migrationEmbeddedFS embed.FS
 
 func main() {
 	ctx := context.Background()
 
-	// 2. Database Connection String
+	// 1. Connection
 	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
-		os.Getenv("PGUSER"),
-		os.Getenv("PGPASSWORD"),
-		os.Getenv("PGHOST"),
-		os.Getenv("PGPORT"),
-		os.Getenv("PGDATABASE"),
+		os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"),
+		os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGDATABASE"),
 	)
 
 	conn, err := pgx.Connect(ctx, connStr)
@@ -35,15 +26,21 @@ func main() {
 	}
 	defer conn.Close(ctx)
 
-	// 3. Run Migrations
-	fmt.Println("Running database migrations...")
+	// 2. Orchestrate (Calling functions from migrate.go and seed.go)
+	fmt.Println("Starting database setup...")
+
 	if err := runMigrations(ctx, conn); err != nil {
 		log.Fatalf("CRITICAL: Migration failed: %v", err)
 	}
-	fmt.Println("Migrations successful.")
 
-	// 4. Start HTTP Server (Prevents the 'all goroutines are asleep' deadlock)
-	// This keeps the container running and provides a health check for Kubernetes.
+	seedCount, _ := strconv.Atoi(os.Getenv("SEED_ASSET_COUNT"))
+	if seedCount > 0 {
+		if err := seedRealisticAssets(ctx, conn, seedCount); err != nil {
+			log.Printf("Warning: Seeding failed: %v", err)
+		}
+	}
+
+	// 3. Keep Alive
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, "ok")
@@ -51,41 +48,7 @@ func main() {
 
 	port := ":8080"
 	fmt.Printf("Asset-service listening on %s\n", port)
-
-	// This function blocks forever, keeping the pod alive.
 	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatalf("CRITICAL: Server failed: %v", err)
 	}
-}
-
-func runMigrations(ctx context.Context, conn *pgx.Conn) error {
-	migrator, err := migrate.NewMigrator(ctx, conn, "public.schema_version")
-	if err != nil {
-		return fmt.Errorf("could not create migrator: %w", err)
-	}
-
-	// Zoom into the specific folder in the embedded FS
-	migrationRoot, err := fs.Sub(migrationEmbeddedFS, "db/migrations")
-	if err != nil {
-		return fmt.Errorf("failed to create sub-filesystem: %w", err)
-	}
-
-	// Load and Migrate
-	err = migrator.LoadMigrations(migrationRoot)
-	if err != nil {
-		return fmt.Errorf("failed to load migrations: %w", err)
-	}
-
-	err = migrator.Migrate(ctx)
-	if err != nil {
-		return fmt.Errorf("migration execution failed: %w", err)
-	}
-
-	ver, err := migrator.GetCurrentVersion(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to get current version: %w", err)
-	}
-	fmt.Printf("Database updated to version: %d\n", ver)
-
-	return nil
 }
