@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package asset_service;
+
+// This must match your folder structure for the generated Go files
+option go_package = "./proto";
+
+// This import requires the file to exist at:
+// [any-include-path]/google/protobuf/timestamp.proto
+import "google/protobuf/timestamp.proto";
+
+// The gRPC Service Definition
+service AssetService {
+  // Asset Operations
+  rpc UpdateAsset(UpdateAssetRequest) returns (AssetResponse);
+
+  // Issue Operations
+  rpc UpdateIssue(UpdateIssueRequest) returns (IssueResponse);
+
+  // Note Operations
+  rpc UpdateNote(UpdateNoteRequest) returns (NoteResponse);
+
+  // Metadata Operations
+  rpc UpdateAssetClass(UpdateAssetClassRequest) returns (AssetClassResponse);
+  rpc UpdateCriticality(UpdateCriticalityRequest) returns (CriticalityResponse);
+  rpc UpdateDeviceType(UpdateDeviceTypeRequest) returns (DeviceTypeResponse);
+}
+
+// --- ASSET MESSAGES ---
+message UpdateAssetRequest {
+  int32 id = 1;
+  optional string name = 2;
+  optional int32 asset_class_id = 3;
+  optional int32 criticality_id = 4;
+  optional DeviceDetail device_info = 5;
+  optional NetworkDetail network_info = 6;
+  optional SoftwareDetail software_info = 7;
+}
+
+message DeviceDetail {
+  optional string hostname = 1;
+  optional int32 device_type_id = 2;
+  optional string ip_address = 3;
+  optional string mac_address = 4;
+  optional string os_name = 5;
+  optional string os_version = 6;
+  optional string hardware_cpe = 7;
+}
+
+message NetworkDetail {
+  optional string management_ip = 1;
+  optional int32 device_type_id = 2;
+  optional string mac_address = 3;
+  optional string firmware_version = 4;
+  optional string model_number = 5;
+  optional string serial_number = 6;
+  optional int32 total_ports = 7;
+}
+
+message SoftwareDetail {
+  optional string name = 1;
+  optional string os_name = 2;
+  optional string os_version = 3;
+  optional string version = 4;
+  optional string vendor = 5;
+  optional string software_cpe = 6;
+}
+
+message AssetResponse {
+  int32 id = 1;
+  string name = 2;
+  int32 asset_class_id = 3;
+  int32 criticality_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// --- ISSUE MESSAGES ---
+message UpdateIssueRequest {
+  int32 id = 1;
+  optional int32 issue_type_id = 2;
+  optional int32 status_id = 3;
+  optional int32 issue_source_id = 4;
+  optional string external_issue_id = 5;
+  optional string description = 6;
+}
+
+message IssueResponse {
+  int32 id = 1;
+  int32 asset_id = 2;
+  int32 status_id = 3;
+  string external_issue_id = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+// --- NOTE MESSAGES ---
+message UpdateNoteRequest {
+  int32 id = 1;
+  optional int32 asset_issue_id = 2;
+  optional string content = 3;
+}
+
+message NoteResponse {
+  int32 id = 1;
+  string content = 2;
+}
+
+// --- METADATA MESSAGES ---
+message UpdateAssetClassRequest {
+  int32 id = 1;
+  optional string name = 2;
+  optional string definition = 3;
+}
+
+message AssetClassResponse {
+  int32 id = 1;
+  string name = 2;
+}
+
+message UpdateCriticalityRequest {
+  int32 id = 1;
+  optional string name = 2;
+  optional int32 value = 3;
+}
+
+message CriticalityResponse {
+  int32 id = 1;
+  string name = 2;
+  int32 value = 3;
+}
+
+message UpdateDeviceTypeRequest {
+  int32 id = 1;
+  optional int32 asset_class_id = 2;
+  optional string name = 3;
+}
+
+message DeviceTypeResponse {
+  int32 id = 1;
+  string name = 2;
+}
