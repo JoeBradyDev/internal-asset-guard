@@ -118,6 +118,7 @@ DELETE FROM software_detail WHERE asset_id = $1;
 -- name: GetFullAsset :one
 SELECT
     a.id, a.name, a.created_at,
+    a.asset_class_id,
     cl.name AS asset_class,
     cr.id AS criticality_id,
     cr.name AS criticality,
@@ -142,6 +143,7 @@ WHERE a.id = $1;
 -- name: ListFullAssetsPaged :many
 SELECT
     a.id, a.name, a.created_at,
+    a.asset_class_id,
     cl.name AS asset_class,
     cr.id AS criticality_id,
     cr.name AS criticality,

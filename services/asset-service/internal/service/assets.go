@@ -26,6 +26,7 @@ func (s *AssetServer) ListAssets(ctx context.Context, req *proto.ListAssetsReque
 		assetRes := &proto.AssetResponse{
 			Id:            row.ID,
 			Name:          row.Name,
+			AssetClassId:  row.AssetClassID,
 			AssetClass:    row.AssetClass,
 			CriticalityId: row.CriticalityID,
 			Criticality:   row.Criticality,
@@ -64,6 +65,7 @@ func (s *AssetServer) GetAsset(ctx context.Context, req *proto.GetAssetRequest) 
 	res := &proto.AssetResponse{
 		Id:            row.ID,
 		Name:          row.Name,
+		AssetClassId:  row.AssetClassID,
 		AssetClass:    row.AssetClass,
 		CriticalityId: row.CriticalityID,
 		Criticality:   row.Criticality,

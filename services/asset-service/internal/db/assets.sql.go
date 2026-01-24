@@ -270,6 +270,7 @@ const getFullAsset = `-- name: GetFullAsset :one
 
 SELECT
     a.id, a.name, a.created_at,
+    a.asset_class_id,
     cl.name AS asset_class,
     cr.id AS criticality_id,
     cr.name AS criticality,
@@ -296,6 +297,7 @@ type GetFullAssetRow struct {
 	ID            int32
 	Name          string
 	CreatedAt     pgtype.Timestamptz
+	AssetClassID  int32
 	AssetClass    string
 	CriticalityID int32
 	Criticality   string
@@ -312,6 +314,7 @@ func (q *Queries) GetFullAsset(ctx context.Context, id int32) (GetFullAssetRow, 
 		&i.ID,
 		&i.Name,
 		&i.CreatedAt,
+		&i.AssetClassID,
 		&i.AssetClass,
 		&i.CriticalityID,
 		&i.Criticality,
@@ -394,6 +397,7 @@ func (q *Queries) GetSourcesByAsset(ctx context.Context, assetID int32) ([]Asset
 const listFullAssetsPaged = `-- name: ListFullAssetsPaged :many
 SELECT
     a.id, a.name, a.created_at,
+    a.asset_class_id,
     cl.name AS asset_class,
     cr.id AS criticality_id,
     cr.name AS criticality,
@@ -431,6 +435,7 @@ type ListFullAssetsPagedRow struct {
 	ID            int32
 	Name          string
 	CreatedAt     pgtype.Timestamptz
+	AssetClassID  int32
 	AssetClass    string
 	CriticalityID int32
 	Criticality   string
@@ -458,6 +463,7 @@ func (q *Queries) ListFullAssetsPaged(ctx context.Context, arg ListFullAssetsPag
 			&i.ID,
 			&i.Name,
 			&i.CreatedAt,
+			&i.AssetClassID,
 			&i.AssetClass,
 			&i.CriticalityID,
 			&i.Criticality,
