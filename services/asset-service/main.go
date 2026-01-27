@@ -14,7 +14,7 @@ import (
 
 	"asset-service/internal/db"
 	"asset-service/internal/service"
-	"asset-service/proto"
+  "asset-service/internal/service/pb"
 )
 
 func main() {
@@ -71,7 +71,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
-	proto.RegisterAssetServiceServer(grpcServer, assetServer)
+	pb.RegisterAssetServiceServer(grpcServer, assetServer)
 
 	// Enable reflection for grpcurl and debugging
 	reflection.Register(grpcServer)

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package asset_service;
 
-option go_package = "asset-service/proto";
+option go_package = "./pb;pb";
 
 import "google/protobuf/timestamp.proto";
 

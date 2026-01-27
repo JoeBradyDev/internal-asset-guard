@@ -6,14 +6,14 @@ import (
 
 	"asset-service/internal/db"
 	"asset-service/internal/dto"
-	"asset-service/proto"
+  "asset-service/internal/service/pb"
 
 	"github.com/jackc/pgx/v5/pgtype"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // CreateNote adds a new note to an asset or a specific issue.
-func (s *AssetServer) CreateNote(ctx context.Context, req *proto.CreateNoteRequest) (*proto.NoteResponse, error) {
+func (s *AssetServer) CreateNote(ctx context.Context, req *pb.CreateNoteRequest) (*pb.NoteResponse, error) {
 	// 1. Map to DTO
 	var issueIDPtr *int
 	if req.AssetIssueId != nil {
@@ -39,7 +39,7 @@ func (s *AssetServer) CreateNote(ctx context.Context, req *proto.CreateNoteReque
 		return nil, fmt.Errorf("failed to create note: %w", err)
 	}
 
-	return &proto.NoteResponse{
+	return &pb.NoteResponse{
 		Id:           note.ID,
 		AssetId:      note.AssetID,
 		AssetIssueId: &note.AssetIssueID.Int32,
@@ -49,15 +49,15 @@ func (s *AssetServer) CreateNote(ctx context.Context, req *proto.CreateNoteReque
 }
 
 // ListNotes retrieves all notes for a specific asset, ordered by newest first.
-func (s *AssetServer) ListNotes(ctx context.Context, req *proto.ListNotesRequest) (*proto.ListNotesResponse, error) {
+func (s *AssetServer) ListNotes(ctx context.Context, req *pb.ListNotesRequest) (*pb.ListNotesResponse, error) {
 	rows, err := s.Queries.GetNotesByAssetID(ctx, req.AssetId)
 	if err != nil {
 		return nil, err
 	}
 
-	var notes []*proto.NoteResponse
+	var notes []*pb.NoteResponse
 	for _, row := range rows {
-		notes = append(notes, &proto.NoteResponse{
+		notes = append(notes, &pb.NoteResponse{
 			Id:           row.ID,
 			AssetId:      row.AssetID,
 			AssetIssueId: &row.AssetIssueID.Int32,
@@ -66,11 +66,11 @@ func (s *AssetServer) ListNotes(ctx context.Context, req *proto.ListNotesRequest
 		})
 	}
 
-	return &proto.ListNotesResponse{Notes: notes}, nil
+	return &pb.ListNotesResponse{Notes: notes}, nil
 }
 
 // UpdateNote handles the partial update of a note's content or issue link.
-func (s *AssetServer) UpdateNote(ctx context.Context, req *proto.UpdateNoteRequest) (*proto.NoteResponse, error) {
+func (s *AssetServer) UpdateNote(ctx context.Context, req *pb.UpdateNoteRequest) (*pb.NoteResponse, error) {
 	// 1. FETCH current state (Requires a GetNoteByID query in notes.sql)
 	current, err := s.Queries.GetNoteByID(ctx, req.Id)
 	if err != nil {
@@ -110,7 +110,7 @@ func (s *AssetServer) UpdateNote(ctx context.Context, req *proto.UpdateNoteReque
 		return nil, err
 	}
 
-	return &proto.NoteResponse{
+	return &pb.NoteResponse{
 		Id:           updated.ID,
 		Content:      updated.Content,
 		AssetIssueId: &updated.AssetIssueID.Int32,
@@ -119,7 +119,7 @@ func (s *AssetServer) UpdateNote(ctx context.Context, req *proto.UpdateNoteReque
 }
 
 // DeleteNote removes a note by ID.
-func (s *AssetServer) DeleteNote(ctx context.Context, req *proto.DeleteNoteRequest) (*proto.Empty, error) {
+func (s *AssetServer) DeleteNote(ctx context.Context, req *pb.DeleteNoteRequest) (*pb.Empty, error) {
 	err := s.Queries.DeleteAssetNote(ctx, req.Id)
-	return &proto.Empty{}, err
+	return &pb.Empty{}, err
 }

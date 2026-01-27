@@ -3,12 +3,12 @@ k8s_yaml('infra/k8s/postgres.yaml')
 k8s_resource('postgres', port_forwards=5432)
 
 # 2. Build Independent Apps
-# Each build points to the root context '.' so they can share libraries if needed
 docker_build(
     'asset-guard-asset-service',
-    context='./services/asset-service',
+    context='.',
     dockerfile='services/asset-service/Dockerfile'
 )
+
 docker_build(
     'asset-guard-gateway',
     context='.',
@@ -25,7 +25,7 @@ docker_build(
 k8s_yaml('infra/k8s/apps.yaml')
 
 # Go Service
-k8s_resource('asset-service', port_forwards=8080)
+k8s_resource('asset-service', port_forwards=50051)
 
 # NestJS Gateway
 k8s_resource('gateway', port_forwards=3000)
@@ -33,7 +33,7 @@ k8s_resource('gateway', port_forwards=3000)
 # Next.js Frontend
 k8s_resource('frontend', port_forwards=4200)
 
-# 4. Watch and Test (Automatic Pass/Fail in Tilt UI)
+# 4. Watch and Test
 local_resource(
     'gateway-unit-tests',
     cmd='npx nx test gateway',

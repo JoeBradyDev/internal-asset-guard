@@ -2,14 +2,14 @@ package service
 
 import (
 	"asset-service/internal/db"
-	"asset-service/proto"
+  "asset-service/internal/service/pb"
 )
 
 // AssetServer is the implementation of the AssetService gRPC server.
 // It embeds UnimplementedAssetServiceServer for forward compatibility
 // and holds the SQLC Queries for database access.
 type AssetServer struct {
-	proto.UnimplementedAssetServiceServer
+	pb.UnimplementedAssetServiceServer
 	Queries *db.Queries
 }
 

@@ -4,14 +4,14 @@ import (
 	"context"
 
 	"asset-service/internal/db"
-	"asset-service/proto"
+  "asset-service/internal/service/pb"
 
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // --- ASSET CLASS ---
 
-func (s *AssetServer) CreateAssetClass(ctx context.Context, req *proto.CreateAssetClassRequest) (*proto.AssetClassResponse, error) {
+func (s *AssetServer) CreateAssetClass(ctx context.Context, req *pb.CreateAssetClassRequest) (*pb.AssetClassResponse, error) {
 	res, err := s.Queries.CreateAssetClass(ctx, db.CreateAssetClassParams{
 		Name: req.Name,
 		Definition: pgtype.Text{String: req.Definition, Valid: req.Definition != ""},
@@ -20,10 +20,10 @@ func (s *AssetServer) CreateAssetClass(ctx context.Context, req *proto.CreateAss
 		return nil, err
 	}
 
-	return &proto.AssetClassResponse{Id: res.ID, Name: res.Name, Definition: res.Definition.String}, nil
+	return &pb.AssetClassResponse{Id: res.ID, Name: res.Name, Definition: res.Definition.String}, nil
 }
 
-func (s *AssetServer) UpdateAssetClass(ctx context.Context, req *proto.UpdateAssetClassRequest) (*proto.AssetClassResponse, error) {
+func (s *AssetServer) UpdateAssetClass(ctx context.Context, req *pb.UpdateAssetClassRequest) (*pb.AssetClassResponse, error) {
 	current, err := s.Queries.GetAssetClassByID(ctx, req.Id)
 	if err != nil {
 		return nil, err
@@ -44,25 +44,25 @@ func (s *AssetServer) UpdateAssetClass(ctx context.Context, req *proto.UpdateAss
 		return nil, err
 	}
 
-	return &proto.AssetClassResponse{Id: updated.ID, Name: updated.Name, Definition: updated.Definition.String}, nil
+	return &pb.AssetClassResponse{Id: updated.ID, Name: updated.Name, Definition: updated.Definition.String}, nil
 }
 
-func (s *AssetServer) ListAssetClasses(ctx context.Context, req *proto.Empty) (*proto.ListAssetClassesResponse, error) {
+func (s *AssetServer) ListAssetClasses(ctx context.Context, req *pb.Empty) (*pb.ListAssetClassesResponse, error) {
 	classes, err := s.Queries.ListAssetClasses(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	var res []*proto.AssetClassResponse
+	var res []*pb.AssetClassResponse
 	for _, c := range classes {
-		res = append(res, &proto.AssetClassResponse{Id: c.ID, Name: c.Name, Definition: c.Definition.String})
+		res = append(res, &pb.AssetClassResponse{Id: c.ID, Name: c.Name, Definition: c.Definition.String})
 	}
-	return &proto.ListAssetClassesResponse{Classes: res}, nil
+	return &pb.ListAssetClassesResponse{Classes: res}, nil
 }
 
 // --- CRITICALITY ---
 
-func (s *AssetServer) CreateCriticality(ctx context.Context, req *proto.CreateCriticalityRequest) (*proto.CriticalityResponse, error) {
+func (s *AssetServer) CreateCriticality(ctx context.Context, req *pb.CreateCriticalityRequest) (*pb.CriticalityResponse, error) {
 	res, err := s.Queries.CreateAssetCriticality(ctx, db.CreateAssetCriticalityParams{
 		Name:  req.Name,
 		Value: int32(req.Value),
@@ -71,10 +71,10 @@ func (s *AssetServer) CreateCriticality(ctx context.Context, req *proto.CreateCr
 		return nil, err
 	}
 
-	return &proto.CriticalityResponse{Id: res.ID, Name: res.Name, Value: res.Value}, nil
+	return &pb.CriticalityResponse{Id: res.ID, Name: res.Name, Value: res.Value}, nil
 }
 
-func (s *AssetServer) UpdateCriticality(ctx context.Context, req *proto.UpdateCriticalityRequest) (*proto.CriticalityResponse, error) {
+func (s *AssetServer) UpdateCriticality(ctx context.Context, req *pb.UpdateCriticalityRequest) (*pb.CriticalityResponse, error) {
 	current, err := s.Queries.GetAssetCriticalityByID(ctx, req.Id)
 	if err != nil {
 		return nil, err
@@ -95,12 +95,12 @@ func (s *AssetServer) UpdateCriticality(ctx context.Context, req *proto.UpdateCr
 		return nil, err
 	}
 
-	return &proto.CriticalityResponse{Id: updated.ID, Name: updated.Name, Value: updated.Value}, nil
+	return &pb.CriticalityResponse{Id: updated.ID, Name: updated.Name, Value: updated.Value}, nil
 }
 
 // --- DEVICE TYPE ---
 
-func (s *AssetServer) CreateDeviceType(ctx context.Context, req *proto.CreateDeviceTypeRequest) (*proto.DeviceTypeResponse, error) {
+func (s *AssetServer) CreateDeviceType(ctx context.Context, req *pb.CreateDeviceTypeRequest) (*pb.DeviceTypeResponse, error) {
 	res, err := s.Queries.CreateDeviceType(ctx, db.CreateDeviceTypeParams{
 		AssetClassID: req.AssetClassId,
 		Name:         req.Name,
@@ -109,30 +109,30 @@ func (s *AssetServer) CreateDeviceType(ctx context.Context, req *proto.CreateDev
 		return nil, err
 	}
 
-	return &proto.DeviceTypeResponse{Id: res.ID, Name: res.Name, AssetClassId: res.AssetClassID}, nil
+	return &pb.DeviceTypeResponse{Id: res.ID, Name: res.Name, AssetClassId: res.AssetClassID}, nil
 }
 
-func (s *AssetServer) ListDeviceTypes(ctx context.Context, req *proto.Empty) (*proto.ListDeviceTypesResponse, error) {
+func (s *AssetServer) ListDeviceTypes(ctx context.Context, req *pb.Empty) (*pb.ListDeviceTypesResponse, error) {
 	types, err := s.Queries.ListDeviceTypes(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	var res []*proto.DeviceTypeResponse
+	var res []*pb.DeviceTypeResponse
 	for _, t := range types {
-		res = append(res, &proto.DeviceTypeResponse{Id: t.ID, Name: t.Name, AssetClassId: t.AssetClassID})
+		res = append(res, &pb.DeviceTypeResponse{Id: t.ID, Name: t.Name, AssetClassId: t.AssetClassID})
 	}
-	return &proto.ListDeviceTypesResponse{DeviceTypes: res}, nil
+	return &pb.ListDeviceTypesResponse{DeviceTypes: res}, nil
 }
 
 // --- DELETE HANDLERS ---
 
-func (s *AssetServer) DeleteAssetClass(ctx context.Context, req *proto.DeleteMetadataRequest) (*proto.Empty, error) {
+func (s *AssetServer) DeleteAssetClass(ctx context.Context, req *pb.DeleteMetadataRequest) (*pb.Empty, error) {
 	err := s.Queries.DeleteAssetClass(ctx, req.Id)
-	return &proto.Empty{}, err
+	return &pb.Empty{}, err
 }
 
-func (s *AssetServer) DeleteCriticality(ctx context.Context, req *proto.DeleteMetadataRequest) (*proto.Empty, error) {
+func (s *AssetServer) DeleteCriticality(ctx context.Context, req *pb.DeleteMetadataRequest) (*pb.Empty, error) {
 	err := s.Queries.DeleteAssetCriticality(ctx, req.Id)
-	return &proto.Empty{}, err
+	return &pb.Empty{}, err
 }
