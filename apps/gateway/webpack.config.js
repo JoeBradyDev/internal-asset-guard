@@ -5,21 +5,17 @@ module.exports = {
   output: {
     path: join(__dirname, '../../dist/apps/gateway'),
     clean: true,
-    ...(process.env.NODE_ENV !== 'production' && {
-      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-    }),
   },
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',
       compiler: 'tsc',
-      main: './src/main.ts',
-      tsConfig: './tsconfig.app.json',
-      assets: ['./src/assets'],
+      main: join(__dirname, './src/main.ts'),
+      tsConfig: join(__dirname, './tsconfig.app.json'),
+      assets: [],
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: true,
-      sourceMap: true,
     }),
   ],
 };

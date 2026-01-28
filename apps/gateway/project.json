@@ -7,14 +7,30 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/gateway"],
       "options": {
-        "command": "webpack-cli build",
-        "args": ["--node-env=production"],
-        "cwd": "apps/gateway"
+        "command": "npx webpack-cli build --config apps/gateway/webpack.config.js --node-env=production && sleep 2 && mkdir -p dist/apps/gateway/asset && cp libs/shared/proto/asset_service.proto dist/apps/gateway/asset/ && echo '✅ PROTO COPIED TO dist/apps/gateway/asset/' && ls -l dist/apps/gateway/asset/asset_service.proto",
+        "parallel": false
       },
       "configurations": {
         "development": {
-          "args": ["--node-env=development"]
+          "command": "npx webpack-cli build --config apps/gateway/webpack.config.js --node-env=development && sleep 2 && mkdir -p dist/apps/gateway/asset && cp libs/shared/proto/asset_service.proto dist/apps/gateway/asset/ && echo '✅ PROTO COPIED TO dist/apps/gateway/asset/' && ls -l dist/apps/gateway/asset/asset_service.proto"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "gateway:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "gateway:build:development"
+        },
+        "production": {
+          "buildTarget": "gateway:build:production"
         }
       }
     },
@@ -43,27 +59,18 @@
       "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
       "executor": "nx:noop"
     },
-    "serve": {
-      "continuous": true,
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/gateway"],
       "options": {
-        "buildTarget": "gateway:build",
-        "runBuildTargetDependencies": false
+        "jestConfig": "apps/gateway/jest.config.ts",
+        "passWithNoTests": true
       },
       "configurations": {
-        "development": {
-          "buildTarget": "gateway:build:development"
-        },
-        "production": {
-          "buildTarget": "gateway:build:production"
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
         }
-      }
-    },
-    "test": {
-      "options": {
-        "passWithNoTests": true
       }
     }
   }
